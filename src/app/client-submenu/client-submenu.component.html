@@ -1,0 +1,17 @@
+
+  <div class="container"
+     fxLayout="column"
+     fxLayoutGap="10px">
+
+     <mat-list>
+        <mat-list-item *ngFor="let option of options">
+          <img matListAvatar src={{option.image}} alt="...">
+          <h3 matLine> {{option.title}} </h3>
+          <p matLine>
+            <span> {{option.title}} </span>
+            <span class="demo-2"> -- {{option.title}} </span>
+          </p>
+        </mat-list-item>
+      </mat-list>
+
+</div>

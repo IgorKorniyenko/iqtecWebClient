@@ -1,0 +1,23 @@
+<div class="container"
+     fxLayout="column"
+     fxLayoutGap="10px"
+     *ngIf=showed>
+
+  <mat-grid-list  fxFlex cols="4" rowHeight="1:1">
+    
+    <mat-grid-tile *ngFor="let option of options" >
+
+      <img matListAvatar src={{option.image}} alt={{option.title}} (click)="showSubMenu(option.title)">
+
+      <mat-grid-tile-footer >
+          <h1>{{option.title}}</h1>
+      </mat-grid-tile-footer >
+       
+    </mat-grid-tile>
+  </mat-grid-list>
+
+</div>
+
+<button (click)="showSubMenu('null')" *ngIf=!showed>Volver</button>
+
+<app-client-submenu *ngIf="selectedMenu == 'Clientes'"></app-client-submenu>  
