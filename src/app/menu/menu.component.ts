@@ -19,7 +19,7 @@ export class MenuComponent implements OnInit {
                     ];
 
   showed : boolean = true;
-  selectedMenu! : string;
+  selectedMenu : string = "null";
 
   constructor() { }
 

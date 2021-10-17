@@ -18,6 +18,6 @@
 
 </div>
 
-<button (click)="showSubMenu('null')" *ngIf=!showed>Volver</button>
+<button *ngIf=!showed (click)="showSubMenu('null')">Inicio</button>
 
 <app-client-submenu *ngIf="selectedMenu == 'Clientes'"></app-client-submenu>  

@@ -8,6 +8,8 @@ import { MenuItem } from '../shared/menuItems/menuItem';
 })
 export class ClientSubmenuComponent implements OnInit {
 
+  showed : boolean = true;
+  selected! : string;
   options : MenuItem[] = [
                           {
                             title : "Crear cliente",
@@ -33,6 +35,11 @@ export class ClientSubmenuComponent implements OnInit {
   constructor() { }
 
   ngOnInit(): void {
+  }
+
+  showForm(title : string){
+    this.showed = !this.showed;
+    this.selected = title;
   }
 
 }

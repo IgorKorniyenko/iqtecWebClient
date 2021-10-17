@@ -1,10 +1,11 @@
 
   <div class="container"
      fxLayout="column"
-     fxLayoutGap="10px">
+     fxLayoutGap="10px"
+     *ngIf=showed>
 
      <mat-list>
-        <mat-list-item *ngFor="let option of options">
+        <mat-list-item *ngFor="let option of options" (click)="showForm(option.title)">
           <img matListAvatar src={{option.image}} alt="...">
           <h3 matLine> {{option.title}} </h3>
           <p matLine>
@@ -15,3 +16,7 @@
       </mat-list>
 
 </div>
+
+<button (click)="showForm('null')" *ngIf=!showed>Volver</button>
+
+<app-create-client *ngIf="selected == 'Crear cliente'"></app-create-client>
