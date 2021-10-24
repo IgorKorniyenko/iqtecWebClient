@@ -1,4 +1,6 @@
-export class Contacto {
+import { Searchable } from "./searchable";
+
+export class Contacto implements Searchable{
     
     contactoPrin : string;
     tlfPrin : string;

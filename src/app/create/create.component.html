@@ -6,7 +6,7 @@
     <h3>Registrar cliente</h3>
     <!-- <p>{{ clienteForm.value | json }} {{ cliente.nombre | json }}</p> -->
 
-    <form novalidate [formGroup]="clienteForm" #fform="ngForm" (ngSubmit)="onSubmit()">
+    <form novalidate [formGroup]="clientForm" #fform="ngForm" (ngSubmit)="onSubmit()">
         <p>
             <mat-form-field class="half-width">
                 <input matInput formControlName="nombre" placeholder="Razon social / Nombre" type="text" required>
@@ -112,7 +112,7 @@
     <h3>Registrar sede</h3>
     
 
-    <form novalidate [formGroup]="clienteForm" #fform="ngForm" (ngSubmit)="onSubmit()">
+    <form novalidate [formGroup]="clientForm" #fform="ngForm" (ngSubmit)="onSubmit()">
         <p>
             <mat-form-field class="half-width">
                 <input matInput formControlName="nombre" placeholder="Razon social / Nombre" type="text" required>
@@ -212,7 +212,7 @@
     <h3>Registrar proyecto</h3>
     
 
-    <form novalidate [formGroup]="clienteForm" #fform="ngForm" (ngSubmit)="onSubmit()">
+    <form novalidate [formGroup]="clientForm" #fform="ngForm" (ngSubmit)="onSubmit()">
         <p>
             <mat-form-field class="half-width">
                 <input matInput formControlName="nombre" placeholder="Razon social / Nombre" type="text" required>
@@ -313,7 +313,7 @@
     <h3>Registrar transporte</h3>
     
 
-    <form novalidate [formGroup]="clienteForm" #fform="ngForm" (ngSubmit)="onSubmit()">
+    <form novalidate [formGroup]="clientForm" #fform="ngForm" (ngSubmit)="onSubmit()">
         <p>
             <mat-form-field class="half-width">
                 <input matInput formControlName="nombre" placeholder="Razon social / Nombre" type="text" required>
@@ -414,7 +414,7 @@
     <h3>Registrar solicitud</h3>
     
 
-    <form novalidate [formGroup]="clienteForm" #fform="ngForm" (ngSubmit)="onSubmit()">
+    <form novalidate [formGroup]="clientForm" #fform="ngForm" (ngSubmit)="onSubmit()">
         <p>
             <mat-form-field class="half-width">
                 <input matInput formControlName="nombre" placeholder="Razon social / Nombre" type="text" required>

@@ -1,4 +1,6 @@
-export class Direccion{
+import { Searchable } from "./searchable";
+
+export class Direccion implements Searchable{
     
     calle : string;
 	cp : string;

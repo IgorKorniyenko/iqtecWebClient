@@ -1,8 +1,9 @@
 import { Direccion } from "./direccion";
 import { Contacto } from "./contacto";
 import { Sede } from "./sede";
+import { Searchable } from "./searchable";
 
-export class Cliente{
+export class Client implements Searchable{
     id! : number;
 	nombre : string;
 	cif : string;
@@ -16,4 +17,5 @@ export class Cliente{
 		this.direccion = new Direccion();
 		this.contacto = new Contacto();
 	}
+	
 }

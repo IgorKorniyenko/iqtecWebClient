@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild, Input } from '@angular/core';
 import { ClientService } from '../services/client.service';
-import { Cliente } from '../shared/models/cliente';
+import { Client } from '../shared/models/client';
 
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
@@ -16,8 +16,8 @@ export class CreateComponent implements OnInit {
 
   @ViewChild('fform') clienteFormDirective;
 
-  clienteForm!: FormGroup;
-  cliente! : Cliente;
+  clientForm!: FormGroup;
+  client! : Client;
 
   //El tipo de formulario seleccionado, si es cliente, sede, etc..
   @Input()
@@ -100,11 +100,11 @@ export class CreateComponent implements OnInit {
    }
 
   ngOnInit(): void {
-    this.cliente = new Cliente();
+    this.client = new Client();
   }
 
   createForm(): void{
-    this.clienteForm = this.fb.group({
+    this.clientForm = this.fb.group({
       nombre : ['', [Validators.required, Validators.minLength(2), Validators.maxLength(25)] ],
       cif : ['', [Validators.required, Validators.pattern] ],
       calle : ['', [Validators.required, Validators.minLength(2), Validators.maxLength(40)]  ],
@@ -123,16 +123,16 @@ export class CreateComponent implements OnInit {
 
     });
 
-    this.clienteForm.valueChanges
+    this.clientForm.valueChanges
       .subscribe(data => this.onValueChanged(data));
 
     this.onValueChanged();
   }
 
   onValueChanged(data?: any) {
-    if (!this.clienteForm) { return; }
+    if (!this.clientForm) { return; }
 
-    const form = this.clienteForm;
+    const form = this.clientForm;
 
     for (const field in this.formErrors) {
       if (this.formErrors.hasOwnProperty(field)) {
@@ -152,26 +152,26 @@ export class CreateComponent implements OnInit {
   }
 
   onSubmit() {
-    this.cliente.nombre = this.clienteForm.controls.nombre.value;
-    this.cliente.cif = this.clienteForm.controls.cif.value;
+    this.client.nombre = this.clientForm.controls.nombre.value;
+    this.client.cif = this.clientForm.controls.cif.value;
 
-    this.cliente.direccion.calle = this.clienteForm.controls.calle.value;
-    this.cliente.direccion.cp = this.clienteForm.controls.cp.value;
-    this.cliente.direccion.pais = this.clienteForm.controls.pais.value;
-    this.cliente.direccion.poblacion = this.clienteForm.controls.poblacion.value;
-    this.cliente.direccion.provincia = this.clienteForm.controls.provincia.value;
+    this.client.direccion.calle = this.clientForm.controls.calle.value;
+    this.client.direccion.cp = this.clientForm.controls.cp.value;
+    this.client.direccion.pais = this.clientForm.controls.pais.value;
+    this.client.direccion.poblacion = this.clientForm.controls.poblacion.value;
+    this.client.direccion.provincia = this.clientForm.controls.provincia.value;
 
-    this.cliente.contacto.contactoPrin = this.clienteForm.controls.contactoPrin.value;
-    this.cliente.contacto.tlfPrin = this.clienteForm.controls.tlfPrin.value;
-    this.cliente.contacto.mailPrin = this.clienteForm.controls.mailPrin.value;
-    this.cliente.contacto.movilPrin = this.clienteForm.controls.movilPrin.value;
-    this.cliente.contacto.contactoSec = this.clienteForm.controls.contactoSec.value;
-    this.cliente.contacto.tlfSec = this.clienteForm.controls.tlfSec.value;
-    this.cliente.contacto.mailSec = this.clienteForm.controls.mailSec.value;
-    this.cliente.contacto.movilSec = this.clienteForm.controls.movilSec.value;
+    this.client.contacto.contactoPrin = this.clientForm.controls.contactoPrin.value;
+    this.client.contacto.tlfPrin = this.clientForm.controls.tlfPrin.value;
+    this.client.contacto.mailPrin = this.clientForm.controls.mailPrin.value;
+    this.client.contacto.movilPrin = this.clientForm.controls.movilPrin.value;
+    this.client.contacto.contactoSec = this.clientForm.controls.contactoSec.value;
+    this.client.contacto.tlfSec = this.clientForm.controls.tlfSec.value;
+    this.client.contacto.mailSec = this.clientForm.controls.mailSec.value;
+    this.client.contacto.movilSec = this.clientForm.controls.movilSec.value;
   
 
-    this.clienteForm.reset({
+    this.clientForm.reset({
       nombre : '',
       cif : '',
       calle : '',
@@ -193,9 +193,9 @@ export class CreateComponent implements OnInit {
   }
 
   registerUser(){
-    this.clienteForm.value
+    this.clientForm.value
     console.log(this.clienteService.getClients());
-    this.clienteService.postCliente(this.cliente);
-    console.log(this.cliente.nombre);
+    this.clienteService.postCliente(this.client);
+    console.log(this.client.nombre);
   }
 }
