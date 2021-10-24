@@ -2,11 +2,11 @@ import { Component, OnInit } from '@angular/core';
 import { MenuItem } from '../shared/menuItems/menuItem';
 
 @Component({
-  selector: 'app-client-submenu',
-  templateUrl: './client-submenu.component.html',
-  styleUrls: ['./client-submenu.component.css']
+  selector: 'app-users-submenu',
+  templateUrl: './users-submenu.component.html',
+  styleUrls: ['./users-submenu.component.css']
 })
-export class ClientSubmenuComponent implements OnInit {
+export class UsersSubmenuComponent implements OnInit {
 
   showed : boolean = true;
   selected! : string;

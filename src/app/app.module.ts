@@ -26,16 +26,22 @@ import { ClientService } from './services/client.service';
 import { AppComponent } from './app.component';
 import { MenuComponent } from './menu/menu.component';
 import { LoginPageComponent } from './login-page/login-page.component';
-import { ClientSubmenuComponent } from './client-submenu/client-submenu.component';
+import { UsersSubmenuComponent } from './users-submenu/users-submenu.component';
 import { CreateClientComponent } from './create-client/create-client.component';
+import { AdministracionSubmenuComponent } from './administracion-submenu/administracion-submenu.component';
+import { ConsultasSubmenuComponent } from './consultas-submenu/consultas-submenu.component';
+import { SeguimientoSubmenuComponent } from './seguimiento-submenu/seguimiento-submenu.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     MenuComponent,
     LoginPageComponent,
-    ClientSubmenuComponent,
-    CreateClientComponent
+    UsersSubmenuComponent,
+    CreateClientComponent,
+    AdministracionSubmenuComponent,
+    ConsultasSubmenuComponent,
+    SeguimientoSubmenuComponent
   ],
   imports: [
     BrowserModule,

@@ -1,20 +1,20 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 
-import { CreateClientComponent } from './client-submenu.component';
+import { UsersSubmenuComponent } from './users-submenu.component';
 
 describe('CreateClientComponent', () => {
-  let component: CreateClientComponent;
-  let fixture: ComponentFixture<CreateClientComponent>;
+  let component: UsersSubmenuComponent;
+  let fixture: ComponentFixture<UsersSubmenuComponent>;
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ CreateClientComponent ]
+      declarations: [ UsersSubmenuComponent ]
     })
     .compileComponents();
   });
 
   beforeEach(() => {
-    fixture = TestBed.createComponent(CreateClientComponent);
+    fixture = TestBed.createComponent(UsersSubmenuComponent);
     component = fixture.componentInstance;
     fixture.detectChanges();
   });

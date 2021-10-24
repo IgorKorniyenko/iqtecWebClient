@@ -3,7 +3,7 @@
      fxLayoutGap="10px"
      *ngIf=showed>
 
-  <mat-grid-list  fxFlex cols="4" rowHeight="1:1">
+  <mat-grid-list  fxFlex cols="2" rowHeight="2:1">
     
     <mat-grid-tile *ngFor="let option of options" >
 
@@ -20,4 +20,7 @@
 
 <button *ngIf=!showed (click)="showSubMenu('null')">Inicio</button>
 
-<app-client-submenu *ngIf="selectedMenu == 'Clientes'"></app-client-submenu>  
+<app-users-submenu *ngIf="selectedMenu == 'Usuarios'"></app-users-submenu>  
+<app-administracion-submenu *ngIf="selectedMenu == 'Administracion'"></app-administracion-submenu>
+<app-consultas-submenu *ngIf="selectedMenu == 'Consultas'"></app-consultas-submenu>
+<app-seguimiento-submenu *ngIf="selectedMenu == 'Seguimiento'"></app-seguimiento-submenu>

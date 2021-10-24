@@ -9,12 +9,20 @@ export class MenuComponent implements OnInit {
 
   options: MenuItem[] = [
                       {
-                        title : "Clientes",
-                        image : "/assets/images/clients.jpg"
+                        title : "Administracion",
+                        image : "/assets/images/application.png"
                       },
                       {
-                        title : "Solicitudes",
-                        image : "/assets/images/application.png"
+                        title : "Seguimiento",
+                        image : "/assets/images/seguimiento.png"
+                      },
+                      {
+                        title : "Consultas",
+                        image : "/assets/images/consultas.png"
+                      },
+                      {
+                        title : "Usuarios",
+                        image : "/assets/images/clients.jpg"
                       }
                     ];
 
