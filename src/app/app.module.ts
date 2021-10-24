@@ -27,10 +27,11 @@ import { AppComponent } from './app.component';
 import { MenuComponent } from './menu/menu.component';
 import { LoginPageComponent } from './login-page/login-page.component';
 import { UsersSubmenuComponent } from './users-submenu/users-submenu.component';
-import { CreateClientComponent } from './create-client/create-client.component';
+import { CreateComponent } from './create/create.component';
 import { AdministracionSubmenuComponent } from './administracion-submenu/administracion-submenu.component';
 import { ConsultasSubmenuComponent } from './consultas-submenu/consultas-submenu.component';
 import { SeguimientoSubmenuComponent } from './seguimiento-submenu/seguimiento-submenu.component';
+import { EditComponent } from './edit/edit.component';
 
 @NgModule({
   declarations: [
@@ -38,10 +39,11 @@ import { SeguimientoSubmenuComponent } from './seguimiento-submenu/seguimiento-s
     MenuComponent,
     LoginPageComponent,
     UsersSubmenuComponent,
-    CreateClientComponent,
+    CreateComponent,
     AdministracionSubmenuComponent,
     ConsultasSubmenuComponent,
-    SeguimientoSubmenuComponent
+    SeguimientoSubmenuComponent,
+    EditComponent
   ],
   imports: [
     BrowserModule,

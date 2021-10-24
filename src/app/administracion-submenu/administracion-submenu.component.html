@@ -21,7 +21,7 @@
 
                 <h1>Clientes</h1>
 
-                <mat-list-item *ngFor="let option of options[0]" (click)="showForm(option.title)">
+                <mat-list-item *ngFor="let option of options[0]" (click)="showForm(option.title, 'client')">
                 <img matListAvatar src={{option.image}} alt="...">
                 <h3 matLine> {{option.title}} </h3>
                 <p matLine>
@@ -48,7 +48,7 @@
         <mat-list>
             <h1>Sedes</h1>
 
-            <mat-list-item *ngFor="let option of options[1]" (click)="showForm(option.title)">
+            <mat-list-item *ngFor="let option of options[1]" (click)="showForm(option.title, 'headquarters')">
             <img matListAvatar src={{option.image}} alt="...">
             <h3 matLine> {{option.title}} </h3>
             <p matLine>
@@ -75,7 +75,7 @@
         <mat-list>
             <h1>Proyectos</h1>
 
-            <mat-list-item *ngFor="let option of options[2]" (click)="showForm(option.title)">
+            <mat-list-item *ngFor="let option of options[2]" (click)="showForm(option.title, 'project')">
             <img matListAvatar src={{option.image}} alt="...">
             <h3 matLine> {{option.title}} </h3>
             <p matLine>
@@ -102,7 +102,7 @@
         <mat-list>
             <h1>Transportes</h1>
 
-            <mat-list-item *ngFor="let option of options[3]" (click)="showForm(option.title)">
+            <mat-list-item *ngFor="let option of options[3]" (click)="showForm(option.title, 'transport')">
             <img matListAvatar src={{option.image}} alt="...">
             <h3 matLine> {{option.title}} </h3>
             <p matLine>
@@ -129,7 +129,7 @@
         <mat-list>
             <h1>Solicitudes</h1>
 
-            <mat-list-item *ngFor="let option of options[4]" (click)="showForm(option.title)">
+            <mat-list-item *ngFor="let option of options[4]" (click)="showForm(option.title, 'request')">
             <img matListAvatar src={{option.image}} alt="...">
             <h3 matLine> {{option.title}} </h3>
             <p matLine>
@@ -148,9 +148,10 @@
 
 </div>
 
-<button (click)="showForm('null')" *ngIf=!showed>Volver</button>
+<button (click)="showForm('null','null')" *ngIf=!showed>Volver</button>
 
-<app-create-client *ngIf="selected == 'Crear cliente'"></app-create-client>
+<app-create *ngIf="selected == 'Crear'" selectedFormType={{type}}></app-create>
+<app-edit *ngIf="selected == 'Editar'" selectedFormType={{type}}></app-edit>
  
  
  <!-- <div class="container"

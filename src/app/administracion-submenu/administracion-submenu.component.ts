@@ -11,6 +11,7 @@ export class AdministracionSubmenuComponent implements OnInit {
 
   showed : boolean = true;
   selected! : string;
+  type! : string;
   options : MenuItem[][] = OPTIONS;
 
   constructor() { }
@@ -18,9 +19,10 @@ export class AdministracionSubmenuComponent implements OnInit {
   ngOnInit(): void {
   }
 
-  showForm(title : string){
+  showForm(title : string, type : string){
     this.showed = !this.showed;
     this.selected = title;
+    this.type = type;
   }
 
 }

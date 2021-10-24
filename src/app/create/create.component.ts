@@ -1,4 +1,4 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
+import { Component, OnInit, ViewChild, Input } from '@angular/core';
 import { ClientService } from '../services/client.service';
 import { Cliente } from '../shared/models/cliente';
 
@@ -8,16 +8,20 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 
 @Component({
-  selector: 'app-create-client',
-  templateUrl: './create-client.component.html',
-  styleUrls: ['./create-client.component.css']
+  selector: 'app-create',
+  templateUrl: './create.component.html',
+  styleUrls: ['./create.component.css']
 })
-export class CreateClientComponent implements OnInit {
+export class CreateComponent implements OnInit {
 
   @ViewChild('fform') clienteFormDirective;
 
   clienteForm!: FormGroup;
   cliente! : Cliente;
+
+  //El tipo de formulario seleccionado, si es cliente, sede, etc..
+  @Input()
+  selectedFormType : string = '';
 
 
   formErrors = {

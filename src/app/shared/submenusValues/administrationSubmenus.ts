@@ -3,11 +3,11 @@ import { MenuItem } from "../menuItems/menuItem";
 export const OPTIONS : MenuItem[][] = [
                                  [
                                     {
-                                        title : "Crear cliente",
+                                        title : "Crear",
                                         image : " /assets/images/subMenus/clients/Add_Male_User_Icon_128.png"
                                     },
                                     {
-                                        title : "Editar cliente",
+                                        title : "Editar",
                                         image : " /assets/images/subMenus/clients/Edit_female_user_Icon_128.png"
                                     },
                                     {
@@ -21,11 +21,11 @@ export const OPTIONS : MenuItem[][] = [
                                 ],
                                 [
                                     {
-                                        title : "Crear sede",
+                                        title : "Crear",
                                         image : " /assets/images/subMenus/clients/Add_Male_User_Icon_128.png"
                                     },
                                     {
-                                        title : "Editar sede",
+                                        title : "Editar",
                                         image : " /assets/images/subMenus/clients/Edit_female_user_Icon_128.png"
                                     },
                                     {
@@ -39,11 +39,11 @@ export const OPTIONS : MenuItem[][] = [
                                 ],
                                 [
                                     {
-                                        title : "Crear proyecto",
+                                        title : "Crear",
                                         image : " /assets/images/subMenus/clients/Add_Male_User_Icon_128.png"
                                     },
                                     {
-                                        title : "Editar proyecto",
+                                        title : "Editar",
                                         image : " /assets/images/subMenus/clients/Edit_female_user_Icon_128.png"
                                     },
                                     {
@@ -57,11 +57,11 @@ export const OPTIONS : MenuItem[][] = [
                                 ],
                                 [
                                     {
-                                        title : "Crear transporte",
+                                        title : "Crear",
                                         image : " /assets/images/subMenus/clients/Add_Male_User_Icon_128.png"
                                     },
                                     {
-                                        title : "Editar transporte",
+                                        title : "Editar",
                                         image : " /assets/images/subMenus/clients/Edit_female_user_Icon_128.png"
                                     },
                                     {
@@ -75,11 +75,11 @@ export const OPTIONS : MenuItem[][] = [
                                 ],
                                 [
                                     {
-                                        title : "Crear solicitud",
+                                        title : "Crear",
                                         image : " /assets/images/subMenus/clients/Add_Male_User_Icon_128.png"
                                     },
                                     {
-                                        title : "Editar solicitud",
+                                        title : "Editar",
                                         image : " /assets/images/subMenus/clients/Edit_female_user_Icon_128.png"
                                     },
                                     {
