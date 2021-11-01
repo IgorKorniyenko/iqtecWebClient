@@ -5,9 +5,7 @@
 
 <!-- Formulario para editar un cliente -->
 <div fxFlex fxFlexOffset="20px" class="form-size" *ngIf="selectedFormType == 'client' && objectIsPresent">
-    <h3>Registrar cliente</h3>
-    <!-- <p>{{ clienteForm.value | json }} {{ cliente.nombre | json }}</p> -->
-
+   
     <form novalidate [formGroup]="clientForm" #fform="ngForm" (ngSubmit)="onSubmit()">
         <p>
             <mat-form-field class="half-width">

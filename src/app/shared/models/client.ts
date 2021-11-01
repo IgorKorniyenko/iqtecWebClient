@@ -4,18 +4,17 @@ import { Sede } from "./sede";
 import { Searchable } from "./searchable";
 
 export class Client implements Searchable{
-    id! : number;
-	nombre : string;
+    idCliente! : number;
+	razonSocial : string;
 	cif : string;
 	direccion : Direccion;
-	contacto : Contacto;
-	sedes! : Sede[];
+	contactos : Contacto[];
 
 	constructor(){
-		this.nombre = "";
+		this.razonSocial = "";
 		this.cif = "";
 		this.direccion = new Direccion();
-		this.contacto = new Contacto();
+		this.contactos = [new Contacto(), new Contacto()];
 	}
 	
 }

@@ -16,9 +16,13 @@ export class ClientService {
     return this.http.get<Client[]>(baseURL + 'Iqtec/clientes/consultar');
   }
 
+  getClient(nombre : string) : Observable<Client>{
+    return this.http.get<Client>(baseURL + 'Iqtec/clientes/nombre/' + nombre);
+  } 
+
   postCliente(cliente : Client) : Observable<Client>{
    
-
+    console.log("guardando cliente");
     return this.http.post<Client>(baseURL + 'Iqtec/clientes/crear/', cliente);
   }
 }

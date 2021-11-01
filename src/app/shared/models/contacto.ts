@@ -2,19 +2,19 @@ import { Searchable } from "./searchable";
 
 export class Contacto implements Searchable{
     
-    contactoPrin : string;
-    tlfPrin : string;
-    movilPrin : string;
-	mailPrin : string;
-    contactoSec! : string;
-    tlfSec! : string;
-    movilSec! : string;
-	mailSec! : string;
+    idContacto! : string;
+    nombre : string;
+    telefono1: string;
+    telefono2: string;
+    email : string;
+
 
     constructor(){
-        this.contactoPrin = "";
-        this.tlfPrin = "";
-        this.movilPrin = "";
-        this.mailPrin = "";
+
+        this.nombre = "";
+        this.telefono1 = "";
+        this.telefono2 = "";
+        this.email = "";
+
     }
 }

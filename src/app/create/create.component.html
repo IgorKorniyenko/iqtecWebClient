@@ -4,7 +4,6 @@
 <!-- Formulario para crear un cliente -->
 <div fxFlex fxFlexOffset="20px" class="form-size" *ngIf="selectedFormType == 'client'">
     <h3>Registrar cliente</h3>
-    <!-- <p>{{ clienteForm.value | json }} {{ cliente.nombre | json }}</p> -->
 
     <form novalidate [formGroup]="clientForm" #fform="ngForm" (ngSubmit)="onSubmit()">
         <p>
@@ -17,11 +16,7 @@
                 <input matInput formControlName="cif" placeholder="Cif" type="text" pattern="[0-9]{8}[A-Za-z]{1}" required>
                 <mat-error *ngIf="formErrors.cif">{{formErrors.cif}}</mat-error>
             </mat-form-field>
-        <!-- </p>
-
-    <br/>
-
-        <p> -->
+        
             <mat-form-field class="half-width">
                 <input matInput formControlName="calle" placeholder="Calle" type="text" required>
                 <mat-error *ngIf="formErrors.calle">{{formErrors.calle}}</mat-error>
@@ -31,8 +26,7 @@
                 <input matInput formControlName="cp" placeholder="Codigo postal" pattern = "[0-9]{5}" type="text" required>
                 <mat-error *ngIf="formErrors.cp">{{formErrors.cp}}</mat-error>
             </mat-form-field>
-        <!-- </p>
-        <p> -->
+       
             <mat-form-field class="half-width">
                 <input matInput formControlName="poblacion" placeholder="Poblacion" type="text" required>
                 <mat-error *ngIf="formErrors.poblacion">{{formErrors.poblacion}}</mat-error>

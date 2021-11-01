@@ -2,6 +2,9 @@ import { Component, OnInit, ViewChild, Input } from '@angular/core';
 import { ClientService } from '../services/client.service';
 import { Client } from '../shared/models/client';
 
+import { CLIENTVALIDATIONMESSAGES } from '../shared/forms/formValidationMessages/clientValidationMessages';
+import { CLIENTFORMFIELDS } from '../shared/forms/formErrorsFields/clientFormFields';
+
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
 
@@ -23,80 +26,13 @@ export class CreateComponent implements OnInit {
   @Input()
   selectedFormType : string = '';
 
-
-  formErrors = {
-    'nombre': '',
-    'cif': '',
-    'pais': '',
-    'calle' : '',
-    'provincia': '',
-    'cp': '',
-    'poblacion': '',
-    'contactoPrin': '',
-    'tlfPrin': '',
-    'movilPrin': '',
-    'mailPrin': '',
-    'contactoSec': '',
-    'tlfSec': '',
-    'movilSec': '',
-    'mailSec': ''
-  };
-
-  validationMessages = {
-    'nombre': {
-      'required':      'Nombre o razon social es requerido.',
-      'minlength':     'Nombre o razon social tiene que tener al menos 2 caracteres.',
-      'maxlength':     'Nombre o razon social puede tener 25 caracteres como maximo.'
-    },
-    'cif': {
-      'required':      'Cif requerido.',
-      'pattern':       'Formato de cif no valido.'
-    },
-    'calle': {
-      'required':      'Calle es requerida.',
-      'minlength':     'Calle tiene que tener al menos 2 caracteres.',
-      'maxlength':     'Calle puede tener 40 caracteres como maximo.'
-    },
-    'pais': {
-      'required':      'Pais es requerido.',
-      'minlength':     'Pais tiene que tener al menos 2 caracteres.',
-      'maxlength':     'Pais puede tener 25 caracteres como maximo.'
-    },
-    'provincia': {
-      'required':      'Provincia es requerida.',
-      'minlength':     'Provincia tiene que tener al menos 2 caracteres.',
-      'maxlength':     'Provincia puede tener 25 caracteres como maximo.'
-    },
-    'cp': {
-      'required':      'Codigo postal requerido.',
-      'pattern':       'Solo admite numeros.'
-    },
-    'poblacion': {
-      'required':      'Poblacion es requerida.',
-      'minlength':     'Poblacion tiene que tener al menos 2 caracteres.',
-      'maxlength':     'Poblacion puede tener 25 caracteres como maximo.'
-    },
-    'contactoPrin': {
-      'required':      'Contacto principal es requerido.',
-      'minlength':     'Contacto principal tiene que tener al menos 2 caracteres.',
-      'maxlength':     'Contacto principal puede tener 40 caracteres como maximo.'
-    },
-    'tlfPrin': {
-      'required':      'Telefono principal es requerido.',
-      'pattern':       'Solo admite numeros.'
-    },
-    'movilPrin': {
-      'required':      'Movil principal es requerido.',
-      'pattern':       'Solo admite numeros.'
-    },
-    'mailPrin': {
-      'required':      'Correo principal es requerido.',
-      'pattern':       'Formato incorrecto.'
-    },
-  };
+  //Se cargan de un archivo externo los campos del formulario que pueden tener errores y sus mensajes
+  formErrors = CLIENTFORMFIELDS;
+  validationMessages = CLIENTVALIDATIONMESSAGES;
 
   constructor(private fb : FormBuilder, private clienteService : ClientService) {
     this.createForm();
+    
    }
 
   ngOnInit(): void {
@@ -152,7 +88,7 @@ export class CreateComponent implements OnInit {
   }
 
   onSubmit() {
-    this.client.nombre = this.clientForm.controls.nombre.value;
+    this.client.razonSocial = this.clientForm.controls.nombre.value;
     this.client.cif = this.clientForm.controls.cif.value;
 
     this.client.direccion.calle = this.clientForm.controls.calle.value;
@@ -161,14 +97,14 @@ export class CreateComponent implements OnInit {
     this.client.direccion.poblacion = this.clientForm.controls.poblacion.value;
     this.client.direccion.provincia = this.clientForm.controls.provincia.value;
 
-    this.client.contacto.contactoPrin = this.clientForm.controls.contactoPrin.value;
-    this.client.contacto.tlfPrin = this.clientForm.controls.tlfPrin.value;
-    this.client.contacto.mailPrin = this.clientForm.controls.mailPrin.value;
-    this.client.contacto.movilPrin = this.clientForm.controls.movilPrin.value;
-    this.client.contacto.contactoSec = this.clientForm.controls.contactoSec.value;
-    this.client.contacto.tlfSec = this.clientForm.controls.tlfSec.value;
-    this.client.contacto.mailSec = this.clientForm.controls.mailSec.value;
-    this.client.contacto.movilSec = this.clientForm.controls.movilSec.value;
+    this.client.contactos[0].nombre = this.clientForm.controls.contactoPrin.value;
+    this.client.contactos[0].telefono1 = this.clientForm.controls.tlfPrin.value;
+    this.client.contactos[0].email = this.clientForm.controls.mailPrin.value;
+    this.client.contactos[0].telefono2 = this.clientForm.controls.movilPrin.value;
+    this.client.contactos[1].nombre = this.clientForm.controls.contactoSec.value;
+    this.client.contactos[1].telefono1 = this.clientForm.controls.tlfSec.value;
+    this.client.contactos[1].email = this.clientForm.controls.mailSec.value;
+    this.client.contactos[1].telefono2 = this.clientForm.controls.movilSec.value;
   
 
     this.clientForm.reset({
@@ -190,12 +126,14 @@ export class CreateComponent implements OnInit {
     });
 
     this.clienteFormDirective.resetForm();
+
+    this.registerUser();
+    console.log(this.client.contactos[0].email);
   }
 
   registerUser(){
     this.clientForm.value
     console.log(this.clienteService.getClients());
-    this.clienteService.postCliente(this.client);
-    console.log(this.client.nombre);
+    this.clienteService.postCliente(this.client).subscribe();
   }
 }
