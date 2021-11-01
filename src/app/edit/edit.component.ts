@@ -73,7 +73,8 @@ export class EditComponent implements OnInit {
                         console.log(this.client.razonSocial);
 
 
-                        if(this.client.razonSocial != ""){
+                        if(this.client != undefined){
+                                console.log(this.client.listaContactos[0].email);
                                 this.createClientForm(this.client);
         
                                 this.objectIsPresent = true;
@@ -83,12 +84,6 @@ export class EditComponent implements OnInit {
                                 this.objectIsPresent = false;
                         }
                 });
-
-                //Si el cliente es encontrado mostramos un formulario rellenado con los datos del cliente encontrado
-
-                
-                
-                
 
                 
                 break;
@@ -107,19 +102,22 @@ export class EditComponent implements OnInit {
     this.clientForm = this.fb.group({
       nombre : [client.razonSocial, [Validators.required, Validators.minLength(2), Validators.maxLength(25)] ],
       cif : [client.cif, [Validators.required, Validators.pattern] ],
+
       calle : [client.direccion.calle, [Validators.required, Validators.minLength(2), Validators.maxLength(40)]  ],
       cp : [client.direccion.cp,[Validators.required, Validators.pattern] ],
       poblacion : [client.direccion.poblacion, [Validators.required, Validators.minLength(2), Validators.maxLength(25)] ],
       provincia : [client.direccion.provincia, [Validators.required, Validators.minLength(2), Validators.maxLength(25)] ],
       pais : [client.direccion.pais, [Validators.required, Validators.minLength(2), Validators.maxLength(25)] ],
-      contactoPrin : [client.contactos[0].nombre, [Validators.required, Validators.minLength(2), Validators.maxLength(40)] ],
-      tlfPrin : [client.contactos[0].telefono1, [Validators.required, Validators.pattern] ],
-      movilPrin : [client.contactos[0].telefono2, [Validators.required, Validators.pattern] ],
-      mailPrin : [client.contactos[0].email, [Validators.required, Validators.email] ],
-      contactoSec : [client.contactos[1].nombre, [Validators.minLength(2), Validators.maxLength(40 )] ],
-      tlfSec : [client.contactos[1].telefono1, [Validators.pattern] ],
-      movilSec : [client.contactos[1].telefono2, [Validators.pattern] ],
-      mailSec : [client.contactos[1].email, [Validators.email] ]
+
+      contactoPrin : [client.listaContactos[0].nombre, [Validators.required, Validators.minLength(2), Validators.maxLength(40)] ],
+      tlfPrin : [client.listaContactos[0].telefono1, [Validators.required, Validators.pattern] ],
+      movilPrin : [client.listaContactos[0].telefono2, [Validators.required, Validators.pattern] ],
+      mailPrin : [client.listaContactos[0].email, [Validators.required, Validators.email] ],
+
+      contactoSec : [client.listaContactos[1].nombre, [Validators.minLength(2), Validators.maxLength(40 )] ],
+      tlfSec : [client.listaContactos[1].telefono1, [Validators.pattern] ],
+      movilSec : [client.listaContactos[1].telefono2, [Validators.pattern] ],
+      mailSec : [client.listaContactos[1].email, [Validators.email] ]
 
     });
   }
@@ -150,14 +148,14 @@ export class EditComponent implements OnInit {
     this.client.direccion.poblacion = this.clientForm.controls.poblacion.value;
     this.client.direccion.provincia = this.clientForm.controls.provincia.value;
 
-    this.client.contactos[0].nombre = this.clientForm.controls.contactoPrin.value;
-    this.client.contactos[0].telefono1 = this.clientForm.controls.tlfPrin.value;
-    this.client.contactos[0].email = this.clientForm.controls.mailPrin.value;
-    this.client.contactos[0].telefono2 = this.clientForm.controls.movilPrin.value;
-    this.client.contactos[1].nombre = this.clientForm.controls.contactoSec.value;
-    this.client.contactos[1].telefono1 = this.clientForm.controls.tlfSec.value;
-    this.client.contactos[1].email = this.clientForm.controls.mailSec.value;
-    this.client.contactos[1].telefono2 = this.clientForm.controls.movilSec.value;
+    this.client.listaContactos[0].nombre = this.clientForm.controls.contactoPrin.value;
+    this.client.listaContactos[0].telefono1 = this.clientForm.controls.tlfPrin.value;
+    this.client.listaContactos[0].email = this.clientForm.controls.mailPrin.value;
+    this.client.listaContactos[0].telefono2 = this.clientForm.controls.movilPrin.value;
+    this.client.listaContactos[1].nombre = this.clientForm.controls.contactoSec.value;
+    this.client.listaContactos[1].telefono1 = this.clientForm.controls.tlfSec.value;
+    this.client.listaContactos[1].email = this.clientForm.controls.mailSec.value;
+    this.client.listaContactos[1].telefono2 = this.clientForm.controls.movilSec.value;
   
 
     this.clientForm.reset({

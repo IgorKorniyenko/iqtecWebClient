@@ -97,14 +97,14 @@ export class CreateComponent implements OnInit {
     this.client.direccion.poblacion = this.clientForm.controls.poblacion.value;
     this.client.direccion.provincia = this.clientForm.controls.provincia.value;
 
-    this.client.contactos[0].nombre = this.clientForm.controls.contactoPrin.value;
-    this.client.contactos[0].telefono1 = this.clientForm.controls.tlfPrin.value;
-    this.client.contactos[0].email = this.clientForm.controls.mailPrin.value;
-    this.client.contactos[0].telefono2 = this.clientForm.controls.movilPrin.value;
-    this.client.contactos[1].nombre = this.clientForm.controls.contactoSec.value;
-    this.client.contactos[1].telefono1 = this.clientForm.controls.tlfSec.value;
-    this.client.contactos[1].email = this.clientForm.controls.mailSec.value;
-    this.client.contactos[1].telefono2 = this.clientForm.controls.movilSec.value;
+    this.client.listaContactos[0].nombre = this.clientForm.controls.contactoPrin.value;
+    this.client.listaContactos[0].telefono1 = this.clientForm.controls.tlfPrin.value;
+    this.client.listaContactos[0].email = this.clientForm.controls.mailPrin.value;
+    this.client.listaContactos[0].telefono2 = this.clientForm.controls.movilPrin.value;
+    this.client.listaContactos[1].nombre = this.clientForm.controls.contactoSec.value;
+    this.client.listaContactos[1].telefono1 = this.clientForm.controls.tlfSec.value;
+    this.client.listaContactos[1].email = this.clientForm.controls.mailSec.value;
+    this.client.listaContactos[1].telefono2 = this.clientForm.controls.movilSec.value;
   
 
     this.clientForm.reset({
@@ -128,7 +128,7 @@ export class CreateComponent implements OnInit {
     this.clienteFormDirective.resetForm();
 
     this.registerUser();
-    console.log(this.client.contactos[0].email);
+    console.log(this.client.listaContactos[0].email);
   }
 
   registerUser(){

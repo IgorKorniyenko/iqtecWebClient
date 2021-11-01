@@ -1,0 +1,6 @@
+<h1>Borrar {{translatedType}}</h1>
+
+<input type="text" size="30" placeholder="Razon social/Nombre" [(ngModel)]="inputKey">
+<button (click)="search(inputKey)">Buscar</button>
+
+<p *ngIf="client != undefined">{{client.razonSocial}}</p>

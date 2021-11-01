@@ -11,7 +11,7 @@ export const OPTIONS : MenuItem[][] = [
                                         image : " /assets/images/subMenus/clients/Edit_female_user_Icon_128.png"
                                     },
                                     {
-                                        title : "Borrar cliente",
+                                        title : "Borrar",
                                         image : " /assets/images/subMenus/clients/Remove_Male_User_Icon_128.png"
                                     },
                                     {

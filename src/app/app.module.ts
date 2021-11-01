@@ -32,6 +32,7 @@ import { AdministracionSubmenuComponent } from './administracion-submenu/adminis
 import { ConsultasSubmenuComponent } from './consultas-submenu/consultas-submenu.component';
 import { SeguimientoSubmenuComponent } from './seguimiento-submenu/seguimiento-submenu.component';
 import { EditComponent } from './edit/edit.component';
+import { DeleteComponent } from './delete/delete.component';
 
 @NgModule({
   declarations: [
@@ -43,7 +44,8 @@ import { EditComponent } from './edit/edit.component';
     AdministracionSubmenuComponent,
     ConsultasSubmenuComponent,
     SeguimientoSubmenuComponent,
-    EditComponent
+    EditComponent,
+    DeleteComponent
   ],
   imports: [
     BrowserModule,

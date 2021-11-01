@@ -22,7 +22,6 @@ export class ClientService {
 
   postCliente(cliente : Client) : Observable<Client>{
    
-    console.log("guardando cliente");
     return this.http.post<Client>(baseURL + 'Iqtec/clientes/crear/', cliente);
   }
 }
