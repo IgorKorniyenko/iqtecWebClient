@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { MenuItem } from '../shared/menuItems/menuItem';
+import { MenuItem } from '../shared/models/menuItem';
+import { MAINMENUVALUES } from '../shared/menuItemsValues/mainMenuValues';
 @Component({
   selector: 'app-menu',
   templateUrl: './menu.component.html',
@@ -7,24 +8,7 @@ import { MenuItem } from '../shared/menuItems/menuItem';
 })
 export class MenuComponent implements OnInit {
 
-  options: MenuItem[] = [
-                      {
-                        title : "Administracion",
-                        image : "/assets/images/application.png"
-                      },
-                      {
-                        title : "Seguimiento",
-                        image : "/assets/images/seguimiento.png"
-                      },
-                      {
-                        title : "Consultas",
-                        image : "/assets/images/consultas.png"
-                      },
-                      {
-                        title : "Usuarios",
-                        image : "/assets/images/clients.jpg"
-                      }
-                    ];
+  options: MenuItem[] = MAINMENUVALUES;
 
   showed : boolean = true;
   selectedMenu : string = "null";

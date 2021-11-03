@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { MenuItem } from '../shared/menuItems/menuItem';
+import { MenuItem } from '../../shared/models/menuItem';
 
 @Component({
   selector: 'app-users-submenu',

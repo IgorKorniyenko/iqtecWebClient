@@ -18,7 +18,7 @@ import { MatInputModule } from '@angular/material/input';
 //Importamos el modulo http
 import { HttpClientModule } from '@angular/common/http';
 
-import { baseURL } from './shared/baseurl'
+import { BASEURL } from './shared/api/endpoints'
 
 //Servicios
 import { ClientService } from './services/client.service';
@@ -26,13 +26,13 @@ import { ClientService } from './services/client.service';
 import { AppComponent } from './app.component';
 import { MenuComponent } from './menu/menu.component';
 import { LoginPageComponent } from './login-page/login-page.component';
-import { UsersSubmenuComponent } from './users-submenu/users-submenu.component';
-import { CreateComponent } from './create/create.component';
-import { AdministracionSubmenuComponent } from './administracion-submenu/administracion-submenu.component';
-import { ConsultasSubmenuComponent } from './consultas-submenu/consultas-submenu.component';
-import { SeguimientoSubmenuComponent } from './seguimiento-submenu/seguimiento-submenu.component';
-import { EditComponent } from './edit/edit.component';
-import { DeleteComponent } from './delete/delete.component';
+import { UsersSubmenuComponent } from './menu/users-submenu/users-submenu.component';
+import { CreateComponent } from './menu/crud-components/create/create.component';
+import { AdministracionSubmenuComponent } from './menu/administracion-submenu/administracion-submenu.component';
+import { ConsultasSubmenuComponent } from './menu/consultas-submenu/consultas-submenu.component';
+import { SeguimientoSubmenuComponent } from './menu/seguimiento-submenu/seguimiento-submenu.component';
+import { EditComponent } from './menu/crud-components/edit/edit.component';
+import { DeleteComponent } from './menu/crud-components/delete/delete.component';
 
 @NgModule({
   declarations: [
@@ -64,7 +64,7 @@ import { DeleteComponent } from './delete/delete.component';
   ],
   providers: [
     ClientService,
-    { provide: 'BaseURL', useValue: baseURL }
+    { provide: 'BaseURL', useValue: BASEURL }
   ],
   bootstrap: [AppComponent]
 })

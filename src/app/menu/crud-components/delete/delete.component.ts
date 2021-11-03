@@ -1,7 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
-import { ClientService } from '../services/client.service';
-import { Client } from '../shared/models/client';
-import { Headquater } from '../shared/models/heaquater';
+import { ClientService } from '../../../services/client.service';
+import { Client } from '../../../shared/models/client';
+import { Headquater } from '../../../shared/models/heaquater';
 
 @Component({
   selector: 'app-delete',

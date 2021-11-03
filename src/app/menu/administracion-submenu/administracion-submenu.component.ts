@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { MenuItem } from '../shared/menuItems/menuItem';
-import { OPTIONS } from '../shared/submenusValues/administrationSubmenus';
+import { MenuItem } from '../../shared/models/menuItem';
+import { OPTIONS } from '../../shared/menuItemsValues/administrationSubmenu/administrationSubmenus';
 
 @Component({
   selector: 'app-administracion-submenu',

@@ -1,7 +1,6 @@
 import { Component, OnInit, Input, NgModule } from '@angular/core';
-import { Client } from '../shared/models/client';
-import { Searchable } from '../shared/models/searchable';
-import { ClientService } from '../services/client.service';
+import { Client } from '../../../shared/models/client';
+import { ClientService } from '../../../services/client.service';
 
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 
@@ -16,7 +15,6 @@ export class EditComponent implements OnInit {
   selectedFormType! : string;
   //Tipo de formulario seleccionado traducido al castellano para mostrar como titulo del formulario
   translatedType! : string;
-  // searchedObject! : Searchable;
 
   //Campo de busqueda
   inputKey! : string;
