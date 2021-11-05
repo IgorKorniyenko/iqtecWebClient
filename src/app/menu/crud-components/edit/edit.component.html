@@ -3,8 +3,9 @@
 <input type="text" size="30" placeholder="Razon social/Nombre" [(ngModel)]="inputKey">
 <button (click)="search(inputKey)">Buscar</button>
 
+
 <!-- Formulario para editar un cliente -->
-<div fxFlex fxFlexOffset="20px" class="form-size" *ngIf="selectedFormType == 'client' && objectIsPresent">
+<div fxFlex fxFlexOffset="20px" class="form-size" *ngIf="selectedFormType == 'client' && showForm">
    
     <form novalidate [formGroup]="clientForm" #fform="ngForm" (ngSubmit)="onSubmit()">
         <p>
@@ -104,5 +105,12 @@
       
     </form>
   </div>
+
+
+  <br/>
+<br/>
+
+<!-- Tabla con todos los objetos encontrados en la base de datos clients={{clients}} -->
+<app-table selectetTableType={{selectedFormType}} ></app-table>
 
 

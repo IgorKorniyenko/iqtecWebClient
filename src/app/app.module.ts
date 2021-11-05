@@ -14,6 +14,7 @@ import { ReactiveFormsModule } from '@angular/forms';
 
 import { MatFormFieldModule } from '@angular/material/form-field';
 import { MatInputModule } from '@angular/material/input';
+import {MatTableModule} from '@angular/material/table'
 
 //Importamos el modulo http
 import { HttpClientModule } from '@angular/common/http';
@@ -33,6 +34,8 @@ import { ConsultasSubmenuComponent } from './menu/consultas-submenu/consultas-su
 import { SeguimientoSubmenuComponent } from './menu/seguimiento-submenu/seguimiento-submenu.component';
 import { EditComponent } from './menu/crud-components/edit/edit.component';
 import { DeleteComponent } from './menu/crud-components/delete/delete.component';
+import { TableComponent } from './menu/table/table.component';
+import { NavbarComponent } from './navbar/navbar.component';
 
 @NgModule({
   declarations: [
@@ -45,7 +48,9 @@ import { DeleteComponent } from './menu/crud-components/delete/delete.component'
     ConsultasSubmenuComponent,
     SeguimientoSubmenuComponent,
     EditComponent,
-    DeleteComponent
+    DeleteComponent,
+    TableComponent,
+    NavbarComponent
   ],
   imports: [
     BrowserModule,
@@ -60,7 +65,8 @@ import { DeleteComponent } from './menu/crud-components/delete/delete.component'
     MatSlideToggleModule,
     ReactiveFormsModule,
     MatFormFieldModule, 
-    MatInputModule
+    MatInputModule,
+    MatTableModule
   ],
   providers: [
     ClientService,

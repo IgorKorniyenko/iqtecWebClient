@@ -24,4 +24,8 @@ export class ClientService {
    
     return this.http.post<Client>(BASEURL + CLIENTENDPOINTS.get('create'), cliente);
   }
+
+  putCliente(cliente : Client) : Observable<Client>{
+    return this.http.put<Client>(BASEURL + CLIENTENDPOINTS.get('update'), cliente);
+  }
 }

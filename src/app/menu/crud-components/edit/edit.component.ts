@@ -19,10 +19,15 @@ export class EditComponent implements OnInit {
   //Campo de busqueda
   inputKey! : string;
   //Variable que nos indica que el objeto es encontrado
-  objectIsPresent : boolean = false;
+  showForm : boolean = false;
+
+
 
   //Objetos 
   client! : Client;
+
+  //Listas de todos los objetos de la bbdd que seran pasados a la tabla
+  clients! : Client[];
 
   //Formularios
   clientForm! : FormGroup;
@@ -75,11 +80,11 @@ export class EditComponent implements OnInit {
                                 console.log(this.client.listaContactos[0].email);
                                 this.createClientForm(this.client);
         
-                                this.objectIsPresent = true;
+                                this.showForm = true;
                         }else{
         
         
-                                this.objectIsPresent = false;
+                                this.showForm = false;
                         }
                 });
 
@@ -120,11 +125,14 @@ export class EditComponent implements OnInit {
     });
   }
 
+  //Actualizamos el objeto y escondemos el formulario
   onSubmit(){
     switch (this.selectedFormType){
       case "client" : 
-              this.resetClientForm();
-              break;
+                this.resetClientForm();
+                this.clienteService.putCliente(this.client).subscribe();
+                this.showForm = false;
+                break;
       case "request" :
               break;
       case "transport" :
