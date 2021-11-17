@@ -4,7 +4,7 @@ export const CLIENTENDPOINTS = new Map([
     ["create", "Iqtec/clientes/crear"],
     ["getall", "Iqtec/clientes/consultar"],
     ["getbyname", "Iqtec/clientes/nombre/"],
-    ["delete", "Iqtec/clientes/eliminar"],
+    ["delete", "Iqtec/clientes/eliminar/"],
     ["update", "Iqtec/clientes/actualizar"]
 ]);
 
@@ -38,4 +38,13 @@ export const HEADQUATERSENDPOINTS = new Map([
     ["getbyname", "Iqtec/sedes/nombre/"],
     ["delete", "Iqtec/sedes/eliminar/"],
     ["update", "Iqtec/sedes/actualizar"]
+]);
+
+export const USERSENDPOINTS = new Map([
+    ["create", "auth/nuevo"],
+    ["login", "auth/login"],
+    ["getall", "auth/consultar"],
+    ["getbyname", "auth/nombre/"],
+    ["delete", "auth/eliminar/"],
+    ["update", "auth/actualizar"]
 ]);

@@ -17,4 +17,6 @@
     </form>
   </div>
 
-  <app-menu *ngIf="loginSucceful"></app-menu>
+  <app-navbar *ngIf="loginSucceful"></app-navbar>
+  <router-outlet *ngIf="loginSucceful"></router-outlet>
+  <!-- <app-menu *ngIf="loginSucceful"></app-menu> -->

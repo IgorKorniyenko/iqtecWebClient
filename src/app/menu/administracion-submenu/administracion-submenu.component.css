@@ -1,3 +1,16 @@
-h1{
+.container{
+    width:95%;
+    margin: auto;
+    padding-top: 5%;
+    
+
+}
+
+.footer{
+    display: block !important;
     text-align: center;
+    font-size: 2em;
+    margin-top: auto !important;
+    height: fit-content !important;
+    border-radius: 25px;
 }

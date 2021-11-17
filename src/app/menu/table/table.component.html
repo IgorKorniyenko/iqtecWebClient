@@ -1,44 +1,23 @@
-<!-- <table mat-table [dataSource]="clients" >
-
-    
-
-    <ng-container matColumnDef="Id">
-        <th mat-header-cell *matHeaderCellDef> Id </th>
-        <td mat-cell *matCellDef="let cli"> {{cli.Id}} </td>
-      </ng-container>
-
-      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
-
-      <ng-container [matColumnDef]="column" *ngFor="let column of displayedColumns">
-        <th mat-header-cell *matHeaderCellDef> {{column}} </th>
-        <td mat-cell *matCellDef="let emp"> {{emp[column]}} </td>
-    </ng-container>
-</table> -->
+<!-- 
 
 <table mat-table [dataSource]="clients" class="mat-elevation-z8"  *ngIf="selectetTableType=='client'">
 
-  <!--- Note that these columns can be defined in any order.
-        The actual rendered columns are set as a property on the row definition" -->
-
-  <!-- Position Column -->
   <ng-container matColumnDef="Id">
     <th mat-header-cell *matHeaderCellDef> No. </th>
     <td mat-cell *matCellDef="let client"> {{client.idCliente}}</td>
   </ng-container>
 
-  <!-- Name Column -->
   <ng-container matColumnDef="Razon Social">
     <th mat-header-cell *matHeaderCellDef> Name </th>
     <td mat-cell *matCellDef="let client"> {{client.razonSocial}} </td>
   </ng-container>
 
-  <!-- Weight Column -->
+
   <ng-container matColumnDef="Ciudad">
     <th mat-header-cell *matHeaderCellDef> Weight </th>
     <td mat-cell *matCellDef="let client"> {{client.direccion.poblacion}} </td>
   </ng-container>
 
-  <!-- Symbol Column -->
   <ng-container matColumnDef="Telefono">
     <th mat-header-cell *matHeaderCellDef> Symbol </th>
     <td mat-cell *matCellDef="let client"> {{client.listaContactos[0].telefono1}} </td>
@@ -46,5 +25,305 @@
 
   <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
   <tr mat-row *matRowDef="let row; columns: displayedColumns;"></tr>
+</table>
+ -->
+
+<h1>{{selectedTableType}}</h1>
+
+ <mat-form-field id="filter" appearance="standard">
+  <mat-label>Filtrar</mat-label>
+  <input  matInput (keyup)="applyFilter($event)" placeholder="Ex. ium" #input>
+</mat-form-field>
+
+
+<button mat-button *ngIf="selectedTableType=='Usuarios'" (click)="openUserDialog('create', starterUser)"> Crear {{singularTableType}}</button>
+<button mat-button *ngIf="selectedTableType=='Clientes'" (click)="openClientDialog('create', starterClient)"> Crear {{singularTableType}}</button>
+<button mat-button *ngIf="selectedTableType=='Sedes'" (click)="openHeadquaterDialog('create', starterHeadquater)"> Crear {{singularTableType}}</button>
+<button mat-button *ngIf="selectedTableType=='Transportes'" (click)="openTransportDialog('create', starterTransport)"> Crear {{singularTableType}}</button>
+<button mat-button *ngIf="selectedTableType=='Proyectos'" (click)="openProjectDialog('create', starterProject)"> Crear {{singularTableType}}</button>
+<button mat-button *ngIf="selectedTableType=='Solicitudes'" (click)="openRequestDialog('create', starterRequest)"> Crear {{singularTableType}}</button>
+
+
+<!-- Tabla que muestra a los clientes -->
+<table mat-table [dataSource]="dataSource" class="mat-elevation-z8" *ngIf="selectedTableType=='Clientes'">
+
+  <ng-container matColumnDef="Id">
+    <th mat-header-cell *matHeaderCellDef> Id </th>
+    <td mat-cell *matCellDef="let client"> {{client.idCliente}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="Razon Social">
+    <th mat-header-cell *matHeaderCellDef> Razon social </th>
+    <td mat-cell *matCellDef="let client"> {{client.razonSocial}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="Ciudad">
+    <th mat-header-cell *matHeaderCellDef> Ciudad </th>
+    <td mat-cell *matCellDef="let client"> {{client.direccion.provincia}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="Telefono">
+    <th mat-header-cell *matHeaderCellDef> Telefono </th>
+    <td mat-cell *matCellDef="let client"> {{client.listaContactos[0].telefono1}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="Accion">
+    <th mat-header-cell *matHeaderCellDef> Acciones </th>
+    <td mat-cell *matCellDef="let client">
+      <button mat-raised-button color="info" (click)="openClientDialog('show', client)">Mostrar</button> 
+      <button mat-raised-button color="accent" (click)="openClientDialog('edit', client)">Editar</button> 
+      <button mat-raised-button color="warn" (click)="deleteData(client.idCliente, 'client')">Borrar</button> 
+    </td>
+    
+  </ng-container>
+
+  <button mat-raised-button color="accent">Accent</button>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"> </tr>
+
+  <tr class="mat-row" *matNoDataRow>
+    <td class="mat-cell" colspan="4">No se ha encontrado {{selectedTableType}}  "{{input.value}}"</td>
+  </tr>
+</table>
+
+
+
+
+
+
+
+
+
+<!-- Tabla que muestra las sedes -->
+<table mat-table [dataSource]="dataSource" class="mat-elevation-z8" *ngIf="selectedTableType=='Sedes'">
+
+  <ng-container matColumnDef="Id">
+    <th mat-header-cell *matHeaderCellDef> Id </th>
+    <td mat-cell *matCellDef="let headquater"> {{headquater.idSede}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="Razon Social">
+    <th mat-header-cell *matHeaderCellDef> Razón social </th>
+    <td mat-cell *matCellDef="let headquater"> {{headquater.razonSocial}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="Ciudad">
+    <th mat-header-cell *matHeaderCellDef> Ciudad </th>
+    <td mat-cell *matCellDef="let headquater"> {{headquater.direccion.provincia}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="Telefono">
+    <th mat-header-cell *matHeaderCellDef> Telefono </th>
+    <td mat-cell *matCellDef="let headquater"> {{headquater.listaContactos[0].telefono1}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="Accion">
+    <th mat-header-cell *matHeaderCellDef> Acciones </th>
+    <td mat-cell *matCellDef="let headquater">
+      <button mat-raised-button color="info" (click)="openHeadquaterDialog('show', headquater)">Mostrar</button> 
+      <button mat-raised-button color="accent" (click)="openClientDialog('edit', headquater)">Editar</button> 
+      <button mat-raised-button color="warn" (click)="deleteData(headquater.idSede, 'headquater')">Borrar</button> 
+    </td>
+  </ng-container>
+
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"> </tr>
+
+  <tr class="mat-row" *matNoDataRow>
+    <td class="mat-cell" colspan="4">No se ha encontrado {{selectedTableType}}  "{{input.value}}"</td>
+  </tr>
+</table>
+
+
+
+
+
+
+
+
+
+<!-- Tabla que muestra los transportes -->
+<table mat-table [dataSource]="dataSource" class="mat-elevation-z8" *ngIf="selectedTableType=='Transportes'">
+
+  <ng-container matColumnDef="Id">
+    <th mat-header-cell *matHeaderCellDef> Id </th>
+    <td mat-cell *matCellDef="let transport"> {{transport.id}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="Razon Social">
+    <th mat-header-cell *matHeaderCellDef> Nombre </th>
+    <td mat-cell *matCellDef="let transport"> {{transport.nombre}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="Ciudad">
+    <th mat-header-cell *matHeaderCellDef> Ciudad </th>
+    <td mat-cell *matCellDef="let transport"> {{transport.direccion.provincia}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="Telefono">
+    <th mat-header-cell *matHeaderCellDef> Telefono </th>
+    <td mat-cell *matCellDef="let transport"> {{transport.listaContactos[0].telefono1}} </td>
+  </ng-container>
+
+
+  <ng-container matColumnDef="Accion">
+    <th mat-header-cell *matHeaderCellDef> Acciones </th>
+    <td mat-cell *matCellDef="let transport">
+      <button mat-raised-button color="info" (click)="openTransportDialog('show', transport)">Mostrar</button> 
+      <button mat-raised-button color="accent" (click)="openTransportDialog('edit', transport)">Editar</button> 
+      <button mat-raised-button color="warn" (click)="deleteData(transport.id, 'transport')">Borrar</button> 
+    </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"> </tr>
+
+  <tr class="mat-row" *matNoDataRow>
+    <td class="mat-cell" colspan="4">No se ha encontrado {{selectedTableType}}  "{{input.value}}"</td>
+  </tr>
+</table>
+
+
+
+
+
+
+
+
+<!-- Tabla que muestra los proyectos -->
+<table mat-table [dataSource]="dataSource" class="mat-elevation-z8" *ngIf="selectedTableType=='Proyectos'">
+
+  <ng-container matColumnDef="Id">
+    <th mat-header-cell *matHeaderCellDef> Id </th>
+    <td mat-cell *matCellDef="let project"> {{project.idProyecto}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="Razon Social">
+    <th mat-header-cell *matHeaderCellDef> Nombre </th>
+    <td mat-cell *matCellDef="let project"> {{project.nombre}} </td>
+  </ng-container>
+
+
+  <ng-container matColumnDef="NombreCliente">
+    <th mat-header-cell *matHeaderCellDef> Nombre cliente </th>
+    <td mat-cell *matCellDef="let project"> {{project.client.razonSocial}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="Accion">
+    <th mat-header-cell *matHeaderCellDef> Acciones </th>
+    <td mat-cell *matCellDef="let project">
+      <button mat-raised-button color="info" (click)="openProjectDialog('show', project)">Mostrar</button> 
+      <button mat-raised-button color="accent" (click)="openProjectDialog('edit', project)">Editar</button> 
+      <button mat-raised-button color="warn" (click)="deleteData(project.idProyecto, 'transport')">Borrar</button> 
+    </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"> </tr>
+
+  <tr class="mat-row" *matNoDataRow>
+    <td class="mat-cell" colspan="4">No se ha encontrado {{selectedTableType}}  "{{input.value}}"</td>
+  </tr>
+</table>
+
+
+
+
+
+
+
+
+<!-- Tabma que muestra las solicitudes -->
+<table mat-table [dataSource]="dataSource" class="mat-elevation-z8" *ngIf="selectedTableType=='Solicitudes'">
+
+  <ng-container matColumnDef="Id">
+    <th mat-header-cell *matHeaderCellDef> Id </th>
+    <td mat-cell *matCellDef="let request"> {{request.idSolicitud}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="Referencia">
+    <th mat-header-cell *matHeaderCellDef> Referencia </th>
+    <td mat-cell *matCellDef="let request"> {{request.referencia}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="FechaRecogida">
+    <th mat-header-cell *matHeaderCellDef> Fecha recogida </th>
+    <td mat-cell *matCellDef="let request"> {{request.fechaRecogida}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="IdProyecto">
+    <th mat-header-cell *matHeaderCellDef> Id proyecto </th>
+    <td mat-cell *matCellDef="let request"> {{request.proyecto.id}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="Transporte">
+    <th mat-header-cell *matHeaderCellDef> Transporte </th>
+    <td mat-cell *matCellDef="let request"> {{request.transporte.Id}} </td>
+  </ng-container>
+
+
+  <ng-container matColumnDef="Accion">
+    <th mat-header-cell *matHeaderCellDef> Acciones </th>
+    <td mat-cell *matCellDef="let request">
+      <button mat-raised-button color="info" (click)="openRequestDialog('show', request)">Mostrar</button> 
+      <button mat-raised-button color="accent" (click)="openRequestDialog('edit', request)">Editar</button> 
+      <button mat-raised-button color="warn" (click)="deleteData(request.idSolicitud, 'request')">Borrar</button> 
+    </td>
+  </ng-container>
+
+  <button mat-raised-button color="accent">Accent</button>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"> </tr>
+
+  <tr class="mat-row" *matNoDataRow>
+    <td class="mat-cell" colspan="4">No se ha encontrado {{selectedTableType}}  "{{input.value}}"</td>
+  </tr>
+</table>
+
+
+
+<!-- Tabla que muestra los usuarios -->
+<table mat-table [dataSource]="dataSource" class="mat-elevation-z8" *ngIf="selectedTableType=='Usuarios'">
+
+  <ng-container matColumnDef="Id">
+    <th mat-header-cell *matHeaderCellDef> Id </th>
+    <td mat-cell *matCellDef="let user"> {{user.id}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="UserName">
+    <th mat-header-cell *matHeaderCellDef> Nombre de usuario </th>
+    <td mat-cell *matCellDef="let user"> {{user.UserName </td>
+  </ng-container>
+
+
+  <ng-container matColumnDef="Rol">
+    <th mat-header-cell *matHeaderCellDef> Rol </th>
+    <td mat-cell *matCellDef="let user"> {{user.roles[0]}} </td>
+  </ng-container>
+
+  <ng-container matColumnDef="Accion">
+    <th mat-header-cell *matHeaderCellDef> Acciones </th>
+    <td mat-cell *matCellDef="let project">
+      <button mat-raised-button color="info" (click)="openProjectDialog('show', project)">Mostrar</button> 
+      <button mat-raised-button color="accent" (click)="openProjectDialog('edit', project)">Editar</button> 
+      <button mat-raised-button color="warn" (click)="deleteData(project.idProyecto, 'transport')">Borrar</button> 
+    </td>
+  </ng-container>
+
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  
+  <tr mat-row *matRowDef="let row; columns: displayedColumns;"> </tr>
+
+  <tr class="mat-row" *matNoDataRow>
+    <td class="mat-cell" colspan="4">No se ha encontrado {{selectedTableType}}  "{{input.value}}"</td>
+  </tr>
 </table>
 

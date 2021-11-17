@@ -28,4 +28,8 @@ export class ClientService {
   putCliente(cliente : Client) : Observable<Client>{
     return this.http.put<Client>(BASEURL + CLIENTENDPOINTS.get('update'), cliente);
   }
+
+  deleteClient(name: string) : Observable<Client>{
+    return this.http.delete<Client>(BASEURL + CLIENTENDPOINTS.get('delete') + name);
+  }
 }

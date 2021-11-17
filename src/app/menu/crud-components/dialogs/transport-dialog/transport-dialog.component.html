@@ -1,0 +1,222 @@
+<div *ngIf="selectedOperation == 'create'">
+    <h3>Registrar cliente</h3>
+
+<form novalidate [formGroup]="transportForm" #fform="ngForm" (ngSubmit)="onSubmit()">
+    <p>
+        <mat-form-field class="half-width">
+            <input matInput formControlName="nombre" placeholder="Razon social / Nombre" type="text" required>
+            <mat-error *ngIf="formErrors.nombre">{{formErrors.nombre}}</mat-error>
+        </mat-form-field>
+    
+        <mat-form-field class="half-width">
+            <input matInput formControlName="cif" placeholder="Cif" type="text" pattern="[0-9]{8}[A-Za-z]{1}" required>
+            <mat-error *ngIf="formErrors.cif">{{formErrors.cif}}</mat-error>
+        </mat-form-field>
+    
+        <mat-form-field class="half-width">
+            <input matInput formControlName="calle" placeholder="Calle" type="text" required>
+            <mat-error *ngIf="formErrors.calle">{{formErrors.calle}}</mat-error>
+        </mat-form-field>
+    
+        <mat-form-field class="half-width">
+            <input matInput formControlName="cp" placeholder="Codigo postal" pattern = "[0-9]{5}" type="text" required>
+            <mat-error *ngIf="formErrors.cp">{{formErrors.cp}}</mat-error>
+        </mat-form-field>
+   
+        <mat-form-field class="half-width">
+            <input matInput formControlName="poblacion" placeholder="Poblacion" type="text" required>
+            <mat-error *ngIf="formErrors.poblacion">{{formErrors.poblacion}}</mat-error>
+        </mat-form-field>
+    </p>
+    <p>
+        <mat-form-field class="half-width">
+            <input matInput formControlName="provincia" placeholder="Provincia" type="text" required>
+            <mat-error *ngIf="formErrors.provincia">{{formErrors.provincia}}</mat-error>
+        </mat-form-field>
+   
+        <mat-form-field class="half-width">
+            <input matInput formControlName="pais" placeholder="Pais" type="text" required>
+            <mat-error *ngIf="formErrors.pais">{{formErrors.pais}}</mat-error>
+        </mat-form-field>
+    </p>
+
+    <br/>
+
+    <p>
+        <mat-form-field class="half-width">
+            <input matInput formControlName="contactoPrin" placeholder="Contacto principal" type="text" required>
+            <mat-error *ngIf="formErrors.contactoPrin">{{formErrors.contactoPrin}}</mat-error>
+        </mat-form-field>
+    
+        <mat-form-field class="half-width">
+            <input matInput formControlName="tlfPrin" placeholder="Telefono principal" pattern = "[0-9]{9}" type="text" required>
+            <mat-error *ngIf="formErrors.tlfPrin">{{formErrors.tlfPrin}}</mat-error>
+        </mat-form-field>
+    </p>
+    <p>
+        <mat-form-field class="half-width">
+            <input matInput formControlName="movilPrin" placeholder="Movil principal" pattern = "[0-9]{9}" type="text" required>
+            <mat-error *ngIf="formErrors.mailPrin">{{formErrors.mailPrin}}</mat-error>
+        </mat-form-field>
+    
+        <mat-form-field class="half-width">
+            <input matInput formControlName="mailPrin" placeholder="Mail principal" type="mail" required>
+            <mat-error *ngIf="formErrors.mailPrin">{{formErrors.mailPrin}}</mat-error>
+        </mat-form-field>
+    </p>
+
+    <br/>
+
+    <p>
+        <mat-form-field class="half-width">
+            <input matInput formControlName="contactoSec" placeholder="Contacto sdecundario" type="text">
+        </mat-form-field>
+    
+        <mat-form-field class="half-width">
+            <input matInput formControlName="tlfSec" placeholder="Telefono sdecundario" pattern = "[0-9]{9}" type="text">
+        </mat-form-field>
+    </p>
+    <p>
+        <mat-form-field class="half-width">
+            <input matInput formControlName="movilSec" placeholder="Movil sdecundario" pattern = "[0-9]{9}" type="number">
+        </mat-form-field>
+    
+        <mat-form-field class="half-width">
+            <input matInput formControlName="mailSec" placeholder="Mail sdecundario" type="mail">
+        </mat-form-field>
+    </p>
+
+  <button type="submit" mat-button class="background-primary text-floral-white">Submit</button>
+  
+</form>
+</div>
+
+
+<!-- HTML para mostrar al cliente -->
+<div *ngIf="selectedOperation == 'show'">
+    <h1>Visualizar cliente</h1>
+
+
+    <p>Nombre/Razon social: {{transport.nombre}}</p>
+    <p>Cif: {{transport.cif}}</p>
+
+    <h3>Dirección</h3>
+    <p>Ciudad: {{transport.direccion.poblacion}}</p>
+    <p>Provincia: {{transport.direccion.provincia}}</p>
+    <p>Cod. Postal: {{transport.direccion.cp}}</p>
+    <p>Calle: {{transport.direccion.calle}}</p>
+    <p>Pais: {{transport.direccion.pais}}</p>
+
+    <br/>
+
+    <h3>Contactos</h3>
+    <p>Nombre: {{transport.listaContactos[0].nombre}}</p>
+    <p>Telefono 1: {{transport.listaContactos[0].telefono1}}</p>
+    <p>Telefono 2: {{transport.listaContactos[0].telefono2}}</p>
+    <p>Email: {{transport.listaContactos[0].email}}</p>
+
+</div>
+
+
+<div *ngIf="selectedOperation == 'edit'">
+    <h1>Editar cliente</h1>
+
+    <form novalidate [formGroup]="transportForm" #fform="ngForm" (ngSubmit)="onSubmit()">
+        <p>
+            <mat-form-field class="half-width">
+                <input matInput formControlName="nombre" placeholder="Razon social / Nombre" type="text" required>
+                <!-- <mat-error *ngIf="formErrors.nombre">{{formErrors.nombre}}</mat-error> -->
+            </mat-form-field>
+        
+            <mat-form-field class="half-width">
+                <input matInput formControlName="cif" placeholder="Cif" type="text" pattern="[0-9]{8}[A-Za-z]{1}" required>
+                <!-- <mat-error *ngIf="formErrors.cif">{{formErrors.cif}}</mat-error> -->
+            </mat-form-field>
+        <!-- </p>
+
+    <br/>
+
+        <p> -->
+            <mat-form-field class="half-width">
+                <input matInput formControlName="calle" placeholder="Calle" type="text" required>
+                <!-- <mat-error *ngIf="formErrors.calle">{{formErrors.calle}}</mat-error> -->
+            </mat-form-field>
+        
+            <mat-form-field class="half-width">
+                <input matInput formControlName="cp" placeholder="Codigo postal" pattern = "[0-9]{5}" type="text" required>
+                <!-- <mat-error *ngIf="formErrors.cp">{{formErrors.cp}}</mat-error> -->
+            </mat-form-field>
+        <!-- </p>
+        <p> -->
+            <mat-form-field class="half-width">
+                <input matInput formControlName="poblacion" placeholder="Poblacion" type="text" required>
+                <!-- <mat-error *ngIf="formErrors.poblacion">{{formErrors.poblacion}}</mat-error> -->
+            </mat-form-field>
+        </p>
+        <p>
+            <mat-form-field class="half-width">
+                <input matInput formControlName="provincia" placeholder="Provincia" type="text" required>
+                <!-- <mat-error *ngIf="formErrors.provincia">{{formErrors.provincia}}</mat-error> -->
+            </mat-form-field>
+       
+            <mat-form-field class="half-width">
+                <input matInput formControlName="pais" placeholder="Pais" type="text" required>
+                <!-- <mat-error *ngIf="formErrors.pais">{{formErrors.pais}}</mat-error> -->
+            </mat-form-field>
+        </p>
+
+        <br/>
+
+        <p>
+            <mat-form-field class="half-width">
+                <input matInput formControlName="contactoPrin" placeholder="Contacto principal" type="text" required>
+                <!-- <mat-error *ngIf="formErrors.contactoPrin">{{formErrors.contactoPrin}}</mat-error> -->
+            </mat-form-field>
+        
+            <mat-form-field class="half-width">
+                <input matInput formControlName="tlfPrin" placeholder="Telefono principal" pattern = "[0-9]{9}" type="text" required>
+                <!-- <mat-error *ngIf="formErrors.tlfPrin">{{formErrors.tlfPrin}}</mat-error> -->
+            </mat-form-field>
+        </p>
+        <p>
+            <mat-form-field class="half-width">
+                <input matInput formControlName="movilPrin" placeholder="Movil principal" pattern = "[0-9]{9}" type="text" required>
+                <!-- <mat-error *ngIf="formErrors.mailPrin">{{formErrors.mailPrin}}</mat-error> -->
+            </mat-form-field>
+        
+            <mat-form-field class="half-width">
+                <input matInput formControlName="mailPrin" placeholder="Mail principal" type="mail" required>
+                <!-- <mat-error *ngIf="formErrors.mailPrin">{{formErrors.mailPrin}}</mat-error> -->
+            </mat-form-field>
+        </p>
+
+        <br/>
+
+        <p>
+            <mat-form-field class="half-width">
+                <input matInput formControlName="contactoSec" placeholder="Contacto sdecundario" type="text">
+                <!-- <mat-error *ngIf="formErrors.contactoPrin">{{formErrors.contactoSec}}</mat-error> -->
+            </mat-form-field>
+        
+            <mat-form-field class="half-width">
+                <input matInput formControlName="tlfSec" placeholder="Telefono sdecundario" pattern = "[0-9]{9}" type="text">
+                <!-- <mat-error *ngIf="formErrors.tlfSec">{{formErrors.tlfSec}}</mat-error> -->
+            </mat-form-field>
+        </p>
+        <p>
+            <mat-form-field class="half-width">
+                <input matInput formControlName="movilSec" placeholder="Movil sdecundario" pattern = "[0-9]{9}" type="number">
+                <!-- <mat-error *ngIf="formErrors.movilSec">{{formErrors.movilSec}}</mat-error> -->
+            </mat-form-field>
+        
+            <mat-form-field class="half-width">
+                <input matInput formControlName="mailSec" placeholder="Mail sdecundario" type="mail">
+                <!-- <mat-error *ngIf="formErrors.mailSec">{{formErrors.mailSec}}</mat-error> -->
+            </mat-form-field>
+        </p>
+    
+      <button type="submit" mat-button class="background-primary text-floral-white">Submit</button>
+      
+    </form>
+    
+</div>

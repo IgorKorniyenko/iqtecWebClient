@@ -1,0 +1,199 @@
+<div *ngIf="selectedOperation == 'create'">
+    <h3>Registrar solicitud</h3>
+
+<form novalidate [formGroup]="requestForm" #fform="ngForm" (ngSubmit)="onSubmit()">
+
+    {{this.requestForm.value | json}}
+    <p>
+        <mat-form-field class="half-width" >
+            <mat-label>Proyecto: </mat-label>
+            <mat-select [(value)]="selectedProjectName" > 
+                <mat-option *ngFor="let project of projectList" [value]="project.nombre" >{{project.nombre}}</mat-option>
+            </mat-select> 
+        </mat-form-field>
+
+        <mat-form-field class="half-width">
+            <mat-label>Sede: </mat-label>
+            <mat-select [(value)]="selectedHeadquaterName">
+                <mat-option *ngFor="let headquater of headquatersList" [value]="headquater.nombre">{{headquater.nombre}}</mat-option>
+            </mat-select> 
+        </mat-form-field>
+
+        <mat-form-field class="half-width">
+            <mat-label>Transporte: </mat-label>
+            <mat-select [(value)]="selectedTransportName">
+                <mat-option *ngFor="let transport of transportsList" [value]="transport.nombre">{{transport.nombre}}</mat-option>
+            </mat-select> 
+        </mat-form-field>
+    </p>
+    <p>
+        <mat-form-field class="half-width">
+            <input matInput formControlName="referencia" placeholder="Referencia" type="text" required>
+            <!-- <mat-error *ngIf="formErrors.nombre">{{formErrors.nombre}}</mat-error> -->
+        </mat-form-field>
+    
+        <mat-form-field class="half-width">
+            <input matInput formControlName="fechaRecogida" placeholder="Fecha Recogida" type="date"  required>
+            <!-- <mat-error *ngIf="formErrors.cif">{{formErrors.cif}}</mat-error> -->
+        </mat-form-field>
+    
+        <mat-form-field class="half-width">
+            <input matInput formControlName="horario" placeholder="Horario" type="text" required>
+            <!-- <mat-error *ngIf="formErrors.calle">{{formErrors.calle}}</mat-error> -->
+        </mat-form-field>
+    
+        <mat-form-field class="half-width">
+            <input matInput formControlName="comentarioTransporte" placeholder="Comentario transporte"  type="text" required>
+            <!-- <mat-error *ngIf="formErrors.cp">{{formErrors.cp}}</mat-error> -->
+        </mat-form-field>
+   
+
+    </p>
+
+
+    <table class="table table-bordered" formArrayName="materiales">
+        <tr>
+          <th colspan="2">Añadrid materiales</th>
+          <th width="150px"><button mat-stroked-button color="accent" type="button" (click)="addMaterials()" class="btn btn-primary">Añadir</button></th>
+        </tr>
+        <tr *ngFor="let materiales of materials().controls; let i=index" [formGroupName]="i">
+
+            <mat-form-field class="half-width" >
+                <mat-label>Material: </mat-label>
+                <mat-select formControlName="type" class="form-control"> 
+                    <mat-option *ngFor="let mat of materialsList" [value]="mat" >{{mat}}</mat-option>
+                </mat-select> 
+            </mat-form-field>
+          
+          <td>
+              <mat-form-field>
+                <mat-label>Cantidad</mat-label>
+                <input matInput formControlName="quantity" class="form-control">
+            </mat-form-field>
+             
+          </td>
+          <td>
+              <button mat-stroked-button color="warn" (click)="removeMaterial(i)" class="btn btn-danger">Borrar</button>
+          </td>
+        </tr>
+      </table>
+        
+      
+    
+    <p>
+
+        
+        <mat-slide-toggle  [(ngModel)]="destruir" [ngModelOptions]="{standalone: true}">Destruir</mat-slide-toggle>
+        <!-- <mat-error *ngIf="formErrors.destruir">{{formErrors.poblacion}}</mat-error> -->
+        
+        <mat-slide-toggle [(ngModel)]="degauss" [ngModelOptions]="{standalone: true}">Degauss</mat-slide-toggle>
+        <!-- <mat-error *ngIf="formErrors.destruir">{{formErrors.poblacion}}</mat-error> -->
+
+        <mat-slide-toggle  [(ngModel)]="pasarRecicje" [ngModelOptions]="{standalone: true}">Pasar reciclaje</mat-slide-toggle>
+        <!-- <mat-error *ngIf="formErrors.destruir">{{formErrors.poblacion}}</mat-error> -->
+        
+        <mat-slide-toggle [(ngModel)]="separarReciclaje" [ngModelOptions]="{standalone: true}">Separar reciclaje</mat-slide-toggle>
+        <!-- <mat-error *ngIf="formErrors.destruir">{{formErrors.poblacion}}</mat-error> -->
+          
+        <mat-slide-toggle [(ngModel)]="reciclarTodo" [ngModelOptions]="{standalone: true}">Reciclar todo</mat-slide-toggle>
+        <!-- <mat-error *ngIf="formErrors.destruir">{{formErrors.poblacion}}</mat-error> -->
+       
+    </p>
+
+    <p>
+        <mat-form-field class="half-width">
+            <input matInput formControlName="comentInventario" placeholder="Comentario inventario" type="text" required>
+            <!-- <mat-error *ngIf="formErrors.calle">{{formErrors.calle}}</mat-error> -->
+        </mat-form-field>
+    
+        <mat-form-field class="half-width">
+            <input matInput formControlName="observaciones" placeholder="Observaciones"  type="text" required>
+            <!-- <mat-error *ngIf="formErrors.cp">{{formErrors.cp}}</mat-error> -->
+        </mat-form-field>
+    </p>
+
+   
+<!-- 
+    <p>
+        <mat-form-field class="half-width">
+            <input matInput formControlName="contactoPrin" placeholder="Contacto principal" type="text" required>
+            <mat-error *ngIf="formErrors.contactoPrin">{{formErrors.contactoPrin}}</mat-error>
+        </mat-form-field>
+    
+        <mat-form-field class="half-width">
+            <input matInput formControlName="tlfPrin" placeholder="Telefono principal" pattern = "[0-9]{9}" type="text" required>
+            <mat-error *ngIf="formErrors.tlfPrin">{{formErrors.tlfPrin}}</mat-error>
+        </mat-form-field>
+    </p>
+    <p>
+        <mat-form-field class="half-width">
+            <input matInput formControlName="movilPrin" placeholder="Movil principal" pattern = "[0-9]{9}" type="text" required>
+            <mat-error *ngIf="formErrors.mailPrin">{{formErrors.mailPrin}}</mat-error>
+        </mat-form-field>
+    
+        <mat-form-field class="half-width">
+            <input matInput formControlName="mailPrin" placeholder="Mail principal" type="mail" required>
+            <mat-error *ngIf="formErrors.mailPrin">{{formErrors.mailPrin}}</mat-error>
+        </mat-form-field>
+    </p>
+
+    <br/>
+
+    <p>
+        <mat-form-field class="half-width">
+            <input matInput formControlName="contactoSec" placeholder="Contacto sdecundario" type="text">
+        </mat-form-field>
+    
+        <mat-form-field class="half-width">
+            <input matInput formControlName="tlfSec" placeholder="Telefono sdecundario" pattern = "[0-9]{9}" type="text">
+        </mat-form-field>
+    </p>
+    <p>
+        <mat-form-field class="half-width">
+            <input matInput formControlName="movilSec" placeholder="Movil sdecundario" pattern = "[0-9]{9}" type="number">
+        </mat-form-field>
+    
+        <mat-form-field class="half-width">
+            <input matInput formControlName="mailSec" placeholder="Mail sdecundario" type="mail">
+        </mat-form-field>
+    </p>
+
+    <p>
+        <mat-form-field class="half-width" >
+            <mat-label>Cliente: </mat-label>
+            <mat-select  formControlName="clientSelect">
+                <mat-option *ngFor="let client of clientsList" [value]="client.razonSocial">{{client.razonSocial}}</mat-option>
+            </mat-select>
+        </mat-form-field>
+    </p> -->
+
+  <button type="submit" mat-button class="background-primary text-floral-white">Submit</button>
+  
+</form>
+</div>
+
+<!-- HTML para mostrar al cliente -->
+<!-- <div *ngIf="selectedOperation == 'show'">
+    <h1>Visualizar cliente</h1>
+
+
+    <p>Nombre/Razon social: {{headquater.nombre}}</p>
+    <p>Cif: {{headquater.cif}}</p>
+
+    <h3>Dirección</h3>
+    <p>Ciudad: {{headquater.direccion.poblacion}}</p>
+    <p>Provincia: {{headquater.direccion.provincia}}</p>
+    <p>Cod. Postal: {{headquater.direccion.cp}}</p>
+    <p>Calle: {{headquater.direccion.calle}}</p>
+    <p>Pais: {{headquater.direccion.pais}}</p>
+
+    <br/>
+
+    <h3>Contactos</h3>
+    <p>Nombre: {{headquater.listaContactos[0].nombre}}</p>
+    <p>Telefono 1: {{headquater.listaContactos[0].telefono1}}</p>
+    <p>Telefono 2: {{headquater.listaContactos[0].telefono2}}</p>
+    <p>Email: {{headquater.listaContactos[0].email}}</p>
+
+</div> -->
+

@@ -2,8 +2,8 @@ import { Component, OnInit, ViewChild, Input } from '@angular/core';
 import { ClientService } from '../../../services/client.service';
 import { Client } from '../../../shared/models/client';
 
-import { CLIENTVALIDATIONMESSAGES } from '../../../shared/forms/formValidationMessages/clientValidationMessages';
-import { CLIENTFORMFIELDS } from '../../../shared/forms/formErrorsFields/clientFormFields';
+import { CLIENTVALIDATIONMESSAGES } from '../../../shared/forms/formValidationMessages/validationMessages';
+import { CLIENTFORMFIELDS } from '../../../shared/forms/formErrorsFields/formFields';
 
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 

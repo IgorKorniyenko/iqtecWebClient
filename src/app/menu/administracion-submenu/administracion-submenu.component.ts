@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { MenuItem } from '../../shared/models/menuItem';
 import { OPTIONS } from '../../shared/menuItemsValues/administrationSubmenu/administrationSubmenus';
+import { ActivatedRoute, Params } from '@angular/router';
 
 @Component({
   selector: 'app-administracion-submenu',
@@ -9,20 +10,35 @@ import { OPTIONS } from '../../shared/menuItemsValues/administrationSubmenu/admi
 })
 export class AdministracionSubmenuComponent implements OnInit {
 
-  showed : boolean = true;
+  //Banderines que hacen que se muestre o no la tabla o el submenu
+  menuShowed : boolean = true;
+  tableShowed : boolean = false;
+
   selected! : string;
-  type! : string;
-  options : MenuItem[][] = OPTIONS;
+
+  //Tipo de submenu elegido
+  selectedType! : string;
+
+  //Iconos y titulos de las subopciones mostradas
+  options : MenuItem[] = OPTIONS;
 
   constructor() { }
 
   ngOnInit(): void {
+    
   }
 
   showForm(title : string, type : string){
-    this.showed = !this.showed;
+    this.menuShowed = !this.menuShowed;
+    this.tableShowed = !this.tableShowed;
     this.selected = title;
-    this.type = type;
+    this.selectedType = type;
+  }
+
+  showTable(type : string){
+    this.selectedType = type;
+    this.menuShowed = false;
+    this.tableShowed = true;
   }
 
 }

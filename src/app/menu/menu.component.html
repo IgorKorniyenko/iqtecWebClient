@@ -1,28 +1,53 @@
-<app-navbar></app-navbar>
+
 
 <div class="container"
      fxLayout="column"
      fxLayoutGap="10px"
      *ngIf=showed>
 
-  <mat-grid-list  fxFlex cols="2" rowHeight="2:1">
+  <mat-grid-list  fxFlex cols="3" rowHeight="1:1">
     
-    <mat-grid-tile *ngFor="let option of options" >
+    <mat-grid-tile >
 
-      <img matListAvatar src={{option.image}} alt={{option.title}} (click)="showSubMenu(option.title)">
+      <a routerLink="/administration">
+        <img matListAvatar src={{options[0].image}}  alt={{options[0].title}} >
+      </a>
 
-      <mat-grid-tile-footer >
-          <h1>{{option.title}}</h1>
+      <mat-grid-tile-footer class="footer">
+        {{ options[0].title }}
       </mat-grid-tile-footer >
-       
     </mat-grid-tile>
+
+    <mat-grid-tile >
+
+      <a routerLink="/track">
+        <img matListAvatar src={{options[1].image}}  alt={{options[0].title}} >
+      </a>
+
+      <mat-grid-tile-footer class="footer">
+        {{ options[1].title }}
+      </mat-grid-tile-footer >
+    </mat-grid-tile>
+
+    <mat-grid-tile >
+
+      <a routerLink="/user">
+        <img matListAvatar src={{options[2].image}}  alt={{options[0].title}} >
+      </a>
+
+      <mat-grid-tile-footer class="footer">
+        {{ options[2].title }}
+      </mat-grid-tile-footer >
+    </mat-grid-tile>
+    
   </mat-grid-list>
 
 </div>
 
 <button *ngIf=!showed (click)="showSubMenu('null')">Inicio</button>
 
+
+<!-- <app-administracion-submenu *ngIf="selectedMenu == 'Administracion'"></app-administracion-submenu>
 <app-users-submenu *ngIf="selectedMenu == 'Usuarios'"></app-users-submenu>  
-<app-administracion-submenu *ngIf="selectedMenu == 'Administracion'"></app-administracion-submenu>
 <app-consultas-submenu *ngIf="selectedMenu == 'Consultas'"></app-consultas-submenu>
-<app-seguimiento-submenu *ngIf="selectedMenu == 'Seguimiento'"></app-seguimiento-submenu>
+<app-seguimiento-submenu *ngIf="selectedMenu == 'Seguimiento'"></app-seguimiento-submenu> -->

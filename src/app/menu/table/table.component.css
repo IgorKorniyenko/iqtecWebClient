@@ -1,3 +1,21 @@
 table {
     width: 100%;
   }
+
+  .mat-column-Id {
+    word-wrap: break-word !important;
+    white-space: unset !important;
+    flex: 0 0 8% !important;
+    width: 5% !important;
+   
+  }
+
+  .mat-button{
+    background-color: green;
+    color: white;
+  }
+
+  #filter{
+    width: 40%;
+    margin-right: 40%;
+  }

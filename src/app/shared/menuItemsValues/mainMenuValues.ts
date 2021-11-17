@@ -9,12 +9,12 @@ export const MAINMENUVALUES : MenuItem[] = [
       title : "Seguimiento",
       image : "/assets/images/seguimiento.png"
     },
-    {
-      title : "Consultas",
-      image : "/assets/images/consultas.png"
-    },
+    // {
+    //   title : "Consultas",
+    //   image : "/assets/images/consultas.png"
+    // },
     {
       title : "Usuarios",
-      image : "/assets/images/clients.jpg"
+      image : "/assets/images/clients.png"
     }
   ];
