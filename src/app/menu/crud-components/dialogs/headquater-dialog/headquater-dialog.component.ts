@@ -33,6 +33,17 @@ export class HeadquaterDialogComponent implements OnInit {
         private headquaterService: HeadquaterService,
         private clientService: ClientService) {
 
+
+          this.clientService.getClients().subscribe(data => {
+            this.clientsList = data;
+          });
+      
+          this.selectedOperation = this.data.operation;
+          
+          this.headquater = this.data.object;
+
+          console.log(this.headquater)
+
           if(this.selectedOperation == 'edit'){
             this.createFormEdit(this.headquater);
           }else{
@@ -41,20 +52,15 @@ export class HeadquaterDialogComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.clientService.getClients().subscribe(data => {
-      this.clientsList = data;
-    });
-
-    this.selectedOperation = this.data.operation;
     
-    this.headquater = this.data.object;
 
-    if(this.selectedOperation == 'edit'){
-      this.createFormEdit(this.headquater);
-    }
+    // if(this.selectedOperation == 'edit'){
+    //   this.createFormEdit(this.headquater);
+    // }
   }
 
   createFormEdit(headquater: Headquater){
+    console.log(headquater)
     this.headquaterForm = this.fb.group({
       nombre : [headquater.nombre, [Validators.required, Validators.minLength(2), Validators.maxLength(25)] ],
       cif : [headquater.cif, [Validators.required, Validators.pattern] ],
@@ -70,10 +76,12 @@ export class HeadquaterDialogComponent implements OnInit {
       movilPrin : [headquater.listaContactos[0].telefono2, [Validators.required, Validators.pattern] ],
       mailPrin : [headquater.listaContactos[0].email, [Validators.required, Validators.email] ],
 
-      contactoSec : [headquater.listaContactos[1].nombre, [Validators.minLength(2), Validators.maxLength(40 )] ],
-      tlfSec : [headquater.listaContactos[1].telefono1, [Validators.pattern] ],
-      movilSec : [headquater.listaContactos[1].telefono2, [Validators.pattern] ],
-      mailSec : [headquater.listaContactos[1].email, [Validators.email] ]
+      contactoSec : [headquater.listaContactos[1]?headquater.listaContactos[1].nombre:'', [Validators.minLength(2), Validators.maxLength(40 )] ],
+      tlfSec : [headquater.listaContactos[1]?headquater.listaContactos[1].telefono1:'', [Validators.pattern] ],
+      movilSec : [headquater.listaContactos[1]?headquater.listaContactos[1].telefono2:'', [Validators.pattern] ],
+      mailSec : [headquater.listaContactos[1]?headquater.listaContactos[1].telefono1:'', [Validators.email] ],
+
+      clientSelect : [headquater.cliente.razonSocial, []]
 
     });
   }

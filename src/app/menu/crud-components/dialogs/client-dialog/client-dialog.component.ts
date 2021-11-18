@@ -29,6 +29,10 @@ export class ClientDialogComponent implements OnInit {
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: any,private fb : FormBuilder, private clienteService : ClientService) { 
     
+    this.selectedOperation = this.data.operation;
+    
+    this.client = this.data.object;
+
     if(this.selectedOperation == 'edit'){
       this.createFormEdit(this.client);
     }else{
@@ -37,13 +41,11 @@ export class ClientDialogComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.selectedOperation = this.data.operation;
-    
-    this.client = this.data.object;
+   
 
-    if(this.selectedOperation == 'edit'){
-      this.createFormEdit(this.client);
-    }
+    // if(this.selectedOperation == 'edit'){
+    //   this.createFormEdit(this.client);
+    // }
   }
 
   createFormEdit(client : Client){
@@ -62,10 +64,10 @@ export class ClientDialogComponent implements OnInit {
       movilPrin : [client.listaContactos[0].telefono2, [Validators.required, Validators.pattern] ],
       mailPrin : [client.listaContactos[0].email, [Validators.required, Validators.email] ],
 
-      contactoSec : [client.listaContactos[1].nombre, [Validators.minLength(2), Validators.maxLength(40 )] ],
-      tlfSec : [client.listaContactos[1].telefono1, [Validators.pattern] ],
-      movilSec : [client.listaContactos[1].telefono2, [Validators.pattern] ],
-      mailSec : [client.listaContactos[1].email, [Validators.email] ]
+      contactoSec : [client.listaContactos[1]?client.listaContactos[1].nombre:'', [Validators.minLength(2), Validators.maxLength(40 )] ],
+      tlfSec : [client.listaContactos[1]?client.listaContactos[1].telefono1:'', [Validators.pattern] ],
+      movilSec : [client.listaContactos[1]?client.listaContactos[1].telefono2:'', [Validators.pattern] ],
+      mailSec : [client.listaContactos[1]?client.listaContactos[1].email:'', [Validators.email] ]
 
     });
   }

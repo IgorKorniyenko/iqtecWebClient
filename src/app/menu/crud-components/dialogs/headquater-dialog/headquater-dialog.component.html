@@ -128,7 +128,7 @@
 
 
 <div *ngIf="selectedOperation == 'edit'">
-    <h1>Editar cliente</h1>
+    <h1>Editar sede</h1>
 
     <form novalidate [formGroup]="headquaterForm" #fform="ngForm" (ngSubmit)="onSubmit()">
         <p>
@@ -221,6 +221,15 @@
             <mat-form-field class="half-width">
                 <input matInput formControlName="mailSec" placeholder="Mail sdecundario" type="mail">
                 <!-- <mat-error *ngIf="formErrors.mailSec">{{formErrors.mailSec}}</mat-error> -->
+            </mat-form-field>
+        </p>
+
+        <p>
+            <mat-form-field class="half-width" >
+                <mat-label>Cliente: </mat-label>
+                <mat-select  formControlName="clientSelect">
+                    <mat-option *ngFor="let client of clientsList" [value]="client.razonSocial">{{client.razonSocial}}</mat-option>
+                </mat-select>
             </mat-form-field>
         </p>
     
