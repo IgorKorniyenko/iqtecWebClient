@@ -1,4 +1,3 @@
-import { validateVerticalPosition } from '@angular/cdk/overlay';
 import { Component, Inject, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder,FormControl, FormArray, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
@@ -14,6 +13,9 @@ import { Material } from 'src/app/shared/models/material';
 import { Project } from 'src/app/shared/models/project';
 import { Request } from 'src/app/shared/models/request';
 import { Transport } from 'src/app/shared/models/transport';
+import { MaterialList } from 'src/app/shared/models/enums';
+import { MaterialType } from 'src/app/shared/models/materialType';
+import { TipoService } from 'src/app/services/tipo.service';
 
 @Component({
   selector: 'app-request-dialog',
@@ -24,14 +26,15 @@ export class RequestDialogComponent implements OnInit {
 
   @ViewChild('fform') requestFormDirective;
 
-  materialsList: string[] = ['PC', 'Raton'];
-  selectedMaterials!: string;
+
+  //Lista de materiales disponibles
+  materialsList: string[] = MaterialList;
 
   requestForm!: FormGroup;
   
   request! : Request;
   
-  materialTypesList! : string[];
+  materialTypesList! : MaterialType[];
 
   projectList!: Project[];
   transportsList! : Transport[];
@@ -57,7 +60,8 @@ export class RequestDialogComponent implements OnInit {
         private requestService: RequestService,
         private transportService: TransportService,
         private headquaterService: HeadquaterService,
-        private projectService: ProjectService) {
+        private projectService: ProjectService,
+        private materialTypeService: TipoService) {
 
           if(this.selectedOperation == 'edit'){
             this.createFormEdit(this.request);
@@ -85,12 +89,14 @@ export class RequestDialogComponent implements OnInit {
     var projects = await this.projectService.getProjects().toPromise();
     var headquaters = await this.headquaterService.getHeadquaters().toPromise();
     var transports = await this.transportService.getTransports().toPromise();
+    var materialTypes = await this.materialTypeService.getTypes().toPromise();
 
-    if(projects && headquaters && transports){
+    if(projects && headquaters && transports && materialTypes){
       
       this.projectList = projects;
       this.headquatersList = headquaters;
       this.transportsList = transports;
+      this.materialTypesList = materialTypes;
     }
   }
 
@@ -108,7 +114,7 @@ export class RequestDialogComponent implements OnInit {
 
       headquaterSelect : ['',[Validators.required]],
       projectSelect: ['', []],
-      transportSelect : ['',[Validators.required]]
+      transportSelect : ['',[Validators.required]],
     
     });
   }
@@ -197,7 +203,9 @@ export class RequestDialogComponent implements OnInit {
     this.request.instrucciones.pasarReciclaje = this.pasarRecicje;
     this.request.instrucciones.separarReciclaje = this.separarReciclaje;
     this.request.instrucciones.reciclarTodo = this.reciclarTodo;
-   
+    this.request.instrucciones.comentInventario =this.requestForm.controls.comentInventario.value;
+    this.request.instrucciones.observaciones = this.requestForm.controls.observaciones.value;
+
     this.request.proyecto = this.projectList.find(p => p.nombre == this.selectedProjectName) as Project;
     this.request.sede = this.headquatersList.find(h => h.nombre == this.selectedHeadquaterName) as Headquater;
     this.request.transporte = this.transportsList.find(t => t.nombre == this.selectedTransportName) as Transport;
@@ -206,21 +214,18 @@ export class RequestDialogComponent implements OnInit {
 
     for(let i=0; i<materialsQuantity.length; i++){
 
-      var material: Material;
+      var material: Material = new Material();
 
-      material = new Material(materialsQuantity.at(i).type, materialsQuantity.at(i).quantity);
+      // material = new Material(materialsQuantity.at(i).type, materialsQuantity.at(i).quantity);
 
-      // this.request.materiales[i].tipo = materialsQuantity.at(i).type;
-      // this.request.materiales[i].cantidad = materialsQuantity.at(i).quantity;
+      // material.tipo.tipoMaterial = materialsQuantity.at(i).type;
+      material.tipo = this.materialTypesList.find(e => e.tipoMaterial == materialsQuantity.at(i).type) as MaterialType;
+      material.cantidad = materialsQuantity.at(i).quantity;
 
       this.request.materiales.push(material);
     }
-  
-      console.log(this.request)
     
     
-    
-
     this.resetRequestForm();
    
     this.registerRequest();
@@ -242,6 +247,10 @@ export class RequestDialogComponent implements OnInit {
     this.separarReciclaje = false;
     this.reciclarTodo = false;
 
+    this.selectedHeadquaterName = "";
+    this.selectedProjectName= "";
+    this.selectedTransportName = "";
+
 
     this.requestFormDirective.resetForm();
   }
@@ -249,7 +258,7 @@ export class RequestDialogComponent implements OnInit {
 
   registerRequest(){
     console.log(this.request);
-    //this.requestService.postRequest(this.request).subscribe();
+    this.requestService.postRequest(this.request).subscribe();
     
   }
 
