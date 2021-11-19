@@ -135,10 +135,10 @@ export class ClientDialogComponent implements OnInit {
     this.client.listaContactos[0].telefono1 = this.clientForm.controls.tlfPrin.value;
     this.client.listaContactos[0].email = this.clientForm.controls.mailPrin.value;
     this.client.listaContactos[0].telefono2 = this.clientForm.controls.movilPrin.value;
-    this.client.listaContactos[1].nombre = this.clientForm.controls.contactoSec.value;
-    this.client.listaContactos[1].telefono1 = this.clientForm.controls.tlfSec.value;
-    this.client.listaContactos[1].email = this.clientForm.controls.mailSec.value;
-    this.client.listaContactos[1].telefono2 = this.clientForm.controls.movilSec.value;
+    // this.client.listaContactos[1].nombre = this.clientForm.controls.contactoSec.value;
+    // this.client.listaContactos[1].telefono1 = this.clientForm.controls.tlfSec.value;
+    // this.client.listaContactos[1].email = this.clientForm.controls.mailSec.value;
+    // this.client.listaContactos[1].telefono2 = this.clientForm.controls.movilSec.value;
   
 
     this.clientForm.reset({
@@ -161,14 +161,16 @@ export class ClientDialogComponent implements OnInit {
 
     this.clienteFormDirective.resetForm();
 
-    this.registerUser();
+    this.toServerUser();
     console.log(this.client.listaContactos[0].email);
   }
 
-  registerUser(){
-    this.clientForm.value
-    console.log(this.clienteService.getClients());
-    this.clienteService.postCliente(this.client).subscribe();
+  toServerUser(){
+    if(this.selectedOperation == "edit"){
+      this.clienteService.putCliente(this.client).subscribe();
+    }else{
+      this.clienteService.postCliente(this.client).subscribe();
+    }
   }
 
 }

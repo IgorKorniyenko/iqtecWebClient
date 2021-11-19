@@ -28,6 +28,10 @@ export class TransportDialogComponent implements OnInit {
         private fb : FormBuilder, 
         private transportService: TransportService) {
 
+          this.selectedOperation = this.data.operation;
+    
+          this.transport = this.data.object; 
+
           if(this.selectedOperation == 'edit'){
             this.createFormEdit(this.transport);
           }else{
@@ -36,14 +40,9 @@ export class TransportDialogComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    
-    this.selectedOperation = this.data.operation;
-    
-    this.transport = this.data.object;
 
-    if(this.selectedOperation == 'edit'){
-      this.createFormEdit(this.transport);
-    }
+
+
   }
 
   createFormEdit(transport: Transport){
@@ -62,12 +61,15 @@ export class TransportDialogComponent implements OnInit {
       movilPrin : [transport.listaContactos[0].telefono2, [Validators.required, Validators.pattern] ],
       mailPrin : [transport.listaContactos[0].email, [Validators.required, Validators.email] ],
 
-      contactoSec : [transport.listaContactos[1].nombre, [Validators.minLength(2), Validators.maxLength(40 )] ],
-      tlfSec : [transport.listaContactos[1].telefono1, [Validators.pattern] ],
-      movilSec : [transport.listaContactos[1].telefono2, [Validators.pattern] ],
-      mailSec : [transport.listaContactos[1].email, [Validators.email] ]
+      contactoSec : [transport.listaContactos[1]?transport.listaContactos[1].nombre:'', [Validators.minLength(2), Validators.maxLength(40 )] ],
+      tlfSec : [transport.listaContactos[1]?transport.listaContactos[1].telefono1:'', [Validators.pattern] ],
+      movilSec : [transport.listaContactos[1]?transport.listaContactos[1].telefono2:'', [Validators.pattern] ],
+      mailSec : [transport.listaContactos[1]?transport.listaContactos[1].email:'', [Validators.email] ]
 
     });
+
+    console.log(this.transport);
+
   }
 
 
@@ -156,12 +158,16 @@ export class TransportDialogComponent implements OnInit {
 
     this.transportFormDirective.resetForm();
 
-    this.registerTransport();
+    this.toServerTransport();
   }
 
-  registerTransport(){
+  toServerTransport(){
 
-    this.transportService.postTransport(this.transport).subscribe();
+    if(this.selectedOperation == 'edit'){
+      this.transportService.putTransport(this.transport).subscribe();
+    }else{
+      this.transportService.postTransport(this.transport).subscribe();
+    }
     
   }
 

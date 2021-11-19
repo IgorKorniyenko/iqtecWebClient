@@ -174,10 +174,11 @@ export class HeadquaterDialogComponent implements OnInit {
 
     this.headquaterFormDirective.resetForm();
 
-    this.registerHeadquater();
+    
+    this.toServerHeadquater();
   }
 
-  registerHeadquater(){
+  toServerHeadquater(){
     console.log(this.selectedClientName);
 
     //this.headquaterService.postHeadquater(this.headquater).subscribe();
@@ -185,9 +186,13 @@ export class HeadquaterDialogComponent implements OnInit {
     this.clientService.getClient(this.selectedClientName).subscribe(data => {
       this.headquater.cliente = data;
 
-      console.log(this.headquater.cliente.idCliente);
 
+    if(this.selectedOperation == 'edit'){
+      this.headquaterService.putHeadquater(this.headquater).subscribe();
+    }else{
       this.headquaterService.postHeadquater(this.headquater).subscribe();
+    }
+
     });
     
   }
