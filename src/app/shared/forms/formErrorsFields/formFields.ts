@@ -58,3 +58,9 @@ export const CLIENTFORMFIELDS = {
     'projectSelect': '',
     'headquaterSelect': ''
   }
+
+  export const PROJECTFORMFIELDS = {
+    'nombre': '',
+    'descripcion': '',
+    'clienteSelect': ''
+  }

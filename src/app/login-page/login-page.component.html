@@ -1,4 +1,4 @@
-<div fxFlex fxFlexOffset="20px" class="form-size" *ngIf = "!loginSucceful">
+<!-- <div fxFlex fxFlexOffset="20px" class="form-size" *ngIf = "!loginSucceful">
     <h3>Login</h3>
 
     <form novalidate [formGroup]="loginForm" #fform="ngForm" (ngSubmit)="onSubmit()">
@@ -15,8 +15,29 @@
       <button type="submit" mat-button class="background-primary text-floral-white">Submit</button>
       
     </form>
+  </div> -->
+
+  <div class="login" *ngIf = "!loginSucceful">
+    <form class="custom-form" method="post">
+      <h1>Login</h1>
+      <input
+        type="email"
+        [(ngModel)]="username"
+        name="email"
+        placeholder="Usuario"
+        required="required"
+      />
+      <input
+        type="password"
+        [(ngModel)]="password"
+        name="password"
+        placeholder="Password"
+        required="required"
+      />
+      <button type="submit" (click)="onSubmit()" routerLink="/home">Log in</button>
+    </form>
   </div>
 
-  <app-navbar *ngIf="loginSucceful"></app-navbar>
+  <app-navbar *ngIf="loginSucceful" user={{username}} rol={{user.roles[0].rolNombre}} (logOutEmitter)="logOut($event)"></app-navbar>
   <router-outlet *ngIf="loginSucceful"></router-outlet>
   <!-- <app-menu *ngIf="loginSucceful"></app-menu> -->

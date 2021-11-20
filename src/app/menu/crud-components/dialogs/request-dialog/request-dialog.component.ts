@@ -63,6 +63,10 @@ export class RequestDialogComponent implements OnInit {
         private projectService: ProjectService,
         private materialTypeService: TipoService) {
 
+          this.selectedOperation = this.data.operation;
+    
+    this.request = this.data.object;
+
           if(this.selectedOperation == 'edit'){
             this.createFormEdit(this.request);
           }else{
@@ -74,9 +78,7 @@ export class RequestDialogComponent implements OnInit {
     
     this.initialize();
 
-    this.selectedOperation = this.data.operation;
     
-    this.request = this.data.object;
 
     
   }
@@ -90,6 +92,14 @@ export class RequestDialogComponent implements OnInit {
     var headquaters = await this.headquaterService.getHeadquaters().toPromise();
     var transports = await this.transportService.getTransports().toPromise();
     var materialTypes = await this.materialTypeService.getTypes().toPromise();
+
+    Promise.all([Project, Headquater, Transport, MaterialType]).then(
+
+    ).catch(data => {
+      
+    })
+
+    
 
     if(projects && headquaters && transports && materialTypes){
       
@@ -112,9 +122,11 @@ export class RequestDialogComponent implements OnInit {
 	    
       observaciones : [request.instrucciones.comentInventario,[Validators.required]],
 
-      headquaterSelect : ['',[Validators.required]],
+      headquaterSelect : [request.sede.nombre,[Validators.required]],
       projectSelect: ['', []],
       transportSelect : ['',[Validators.required]],
+
+      materiales: this.fb.array([])
     
     });
   }

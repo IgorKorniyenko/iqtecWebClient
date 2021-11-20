@@ -1,1 +1,81 @@
-<p>project-dialog works!</p>
+<div *ngIf="selectedOperation == 'create'">
+    <h3>Registrar proyecto</h3>
+
+<form novalidate [formGroup]="projectForm" #fform="ngForm" (ngSubmit)="onSubmit()">
+    <p>
+        <mat-form-field class="half-width">
+            <input matInput formControlName="nombre" placeholder="Razon social / Nombre" type="text" required>
+            <mat-error *ngIf="formErrors.nombre">{{formErrors.nombre}}</mat-error>
+        </mat-form-field>
+    
+        <mat-form-field class="half-width">
+            <input matInput formControlName="descripcion" placeholder="Cif" type="text" required>
+            <mat-error *ngIf="formErrors.descripcion">{{formErrors.descripcion}}</mat-error>
+        </mat-form-field>
+    
+    <br/>
+
+    <p>
+        <mat-form-field class="half-width" >
+            <mat-label>Cliente: </mat-label>
+            <mat-select  formControlName="clientSelect">
+                <mat-option *ngFor="let client of clientsList" [value]="client.razonSocial">{{client.razonSocial}}</mat-option>
+            </mat-select>
+        </mat-form-field>
+    </p>
+
+  <button type="submit" mat-button class="background-primary text-floral-white">Submit</button>
+  
+</form>
+</div>
+
+
+<!-- HTML para mostrar al cliente -->
+<div *ngIf="selectedOperation == 'show'">
+    <h1>Visualizar proyecto</h1>
+
+
+    <p>Nombre/Razon social: {{project.nombre}}</p>
+    <p>Descripcion: {{project.descripcion}}</p>
+
+    <h3>Cliente</h3>
+    <p>Cliente: {{project.cliente.razonSocial}}</p>
+   
+</div>
+
+
+
+<!-- Formulario para editar el proyecto -->
+<div *ngIf="selectedOperation == 'edit'">
+    <h1>Editar sede</h1>
+
+    <form novalidate [formGroup]="projectForm" #fform="ngForm" (ngSubmit)="onSubmit()">
+        <p>
+            <mat-form-field class="half-width">
+                <input matInput formControlName="nombre" placeholder="Razon social / Nombre" type="text" required>
+                <!-- <mat-error *ngIf="formErrors.nombre">{{formErrors.nombre}}</mat-error> -->
+            </mat-form-field>
+        
+            <mat-form-field class="half-width">
+                <input matInput formControlName="descripcion" placeholder="Descripcion" type="text" required>
+                <!-- <mat-error *ngIf="formErrors.cif">{{formErrors.cif}}</mat-error> -->
+            </mat-form-field>
+         </p>
+
+         <br/>
+
+        <p>
+            <mat-form-field class="half-width" >
+                <mat-label>Cliente: </mat-label>
+                <mat-select  formControlName="clientSelect">
+                    <mat-option *ngFor="let client of clientsList" [value]="client.razonSocial">{{client.razonSocial}}</mat-option>
+                </mat-select>
+            </mat-form-field>
+        </p>
+    
+      <button type="submit" mat-button class="background-primary text-floral-white">Submit</button>
+      
+    </form>
+    
+</div>
+

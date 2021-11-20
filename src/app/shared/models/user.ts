@@ -1,14 +1,16 @@
 import { Role } from "./role";
 
-export class User{
+export class    User{
 
     id: number;
     nombreUsuario: string;
+    password: string;
     roles: Role[];
 
     constructor(){
         this.id = 0;
         this.nombreUsuario = "";
-        this.roles = [];
+        this.password ="";
+        this.roles = [new Role()];
     }
 }

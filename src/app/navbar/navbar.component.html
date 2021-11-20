@@ -5,7 +5,8 @@
     <a mat-button routerLink="/track"><span class="fa fa-list fa-lg"></span> Seguimiento</a>
     <a mat-button routerLink="/user"><span class="fa fa-address-card fa-lg"></span> Usuarios</a>
 
-    <span><h1>Usuario: Admin</h1></span>
+    <span><h1>Usuario: {{user}}</h1></span>
+    <a mat-button routerLink="/login" (click)="logOut()"><span class="fa fa-address-card fa-lg"></span> Log out</a>
   </mat-toolbar>
   
 

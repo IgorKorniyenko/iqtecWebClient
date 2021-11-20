@@ -18,7 +18,7 @@ import {MatTableModule} from '@angular/material/table';
 import { AppRoutingModule } from './app-routing/app-routing.module';
 
 //Importamos el modulo http
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 
 import { BASEURL } from './shared/api/endpoints'
 
@@ -52,6 +52,9 @@ import { TransportService } from './services/transport.service';
 import { UserService } from './services/user.service';
 import { RequestService } from './services/request.service';
 import { ProjectService } from './services/project.service';
+
+import { CookieService } from 'ngx-cookie-service';
+import { AuthInterceptor } from './services/authInterceptor';
 
 
 @NgModule({
@@ -100,13 +103,15 @@ import { ProjectService } from './services/project.service';
     MatSelectModule
   ],
   providers: [
+    CookieService,
     ClientService,
     TransportService,
     UserService,
     RequestService,
     ProjectService,
     HeadquaterService,
-    { provide: 'BaseURL', useValue: BASEURL }
+    { provide: 'BaseURL', useValue: BASEURL },
+    { provide: HTTP_INTERCEPTORS, useClass: AuthInterceptor, multi: true }
   ],
   bootstrap: [AppComponent]
 })

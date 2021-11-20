@@ -178,3 +178,18 @@ export const CLIENTVALIDATIONMESSAGES = {
       'maxlength':     'Pais puede tener 25 caracteres como maximo.'
     }
   }
+
+  
+  export const PROJECTVALIDATIONMESSAGES  = {
+    'nombre': {
+      'required':      'Nombre o razon social es requerido.',
+      'minlength':     'Nombre o razon social tiene que tener al menos 2 caracteres.',
+      'maxlength':     'Nombre o razon social puede tener 25 caracteres como maximo.'
+    },
+    'descripcion': {
+      'required':      'Descripcion es requerida.'
+    },
+    'clienteSelect': {
+      'required':      'Calle es requerida.'
+    }
+  }

@@ -1,8 +1,10 @@
 import { Component, Inject, OnInit, ViewChild } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ClientService } from 'src/app/services/client.service';
 import { ProjectService } from 'src/app/services/project.service';
+import { PROJECTFORMFIELDS } from 'src/app/shared/forms/formErrorsFields/formFields';
+import { PROJECTVALIDATIONMESSAGES } from 'src/app/shared/forms/formValidationMessages/validationMessages';
 import { Client } from 'src/app/shared/models/client';
 import { Project } from 'src/app/shared/models/project';
 
@@ -15,7 +17,7 @@ export class ProjectDialogComponent implements OnInit {
 
   @ViewChild('fform') projectFormDirective;
 
-  headquaterForm!: FormGroup;
+  projectForm!: FormGroup;
   
   clientsList! : Client[];
   selectedClientName!: string;
@@ -56,65 +58,37 @@ export class ProjectDialogComponent implements OnInit {
     // }
   }
 
-  createFormEdit(headquater: Headquater){
-    console.log(headquater)
-    this.headquaterForm = this.fb.group({
-      nombre : [headquater.nombre, [Validators.required, Validators.minLength(2), Validators.maxLength(25)] ],
-      cif : [headquater.cif, [Validators.required, Validators.pattern] ],
+  createFormEdit(project: Project){
+    console.log(project)
+    this.projectForm = this.fb.group({
+      nombre : [project.nombre, [Validators.required, Validators.minLength(2), Validators.maxLength(25)] ],
+      descripcion : [project.descripcion, [Validators.required] ],
 
-      calle : [headquater.direccion.calle, [Validators.required, Validators.minLength(2), Validators.maxLength(40)]  ],
-      cp : [headquater.direccion.cp,[Validators.required, Validators.pattern] ],
-      poblacion : [headquater.direccion.poblacion, [Validators.required, Validators.minLength(2), Validators.maxLength(25)] ],
-      provincia : [headquater.direccion.provincia, [Validators.required, Validators.minLength(2), Validators.maxLength(25)] ],
-      pais : [headquater.direccion.pais, [Validators.required, Validators.minLength(2), Validators.maxLength(25)] ],
-
-      contactoPrin : [headquater.listaContactos[0].nombre, [Validators.required, Validators.minLength(2), Validators.maxLength(40)] ],
-      tlfPrin : [headquater.listaContactos[0].telefono1, [Validators.required, Validators.pattern] ],
-      movilPrin : [headquater.listaContactos[0].telefono2, [Validators.required, Validators.pattern] ],
-      mailPrin : [headquater.listaContactos[0].email, [Validators.required, Validators.email] ],
-
-      contactoSec : [headquater.listaContactos[1]?headquater.listaContactos[1].nombre:'', [Validators.minLength(2), Validators.maxLength(40 )] ],
-      tlfSec : [headquater.listaContactos[1]?headquater.listaContactos[1].telefono1:'', [Validators.pattern] ],
-      movilSec : [headquater.listaContactos[1]?headquater.listaContactos[1].telefono2:'', [Validators.pattern] ],
-      mailSec : [headquater.listaContactos[1]?headquater.listaContactos[1].telefono1:'', [Validators.email] ],
-
-      clientSelect : [headquater.cliente.razonSocial, []]
+      clientSelect : [project.cliente.razonSocial, []]
 
     });
   }
 
 
   createForm(): void{
-    this.headquaterForm = this.fb.group({
+    this.projectForm = this.fb.group({
       nombre : ['', [Validators.required, Validators.minLength(2), Validators.maxLength(25)] ],
-      cif : ['', [Validators.required, Validators.pattern] ],
-      calle : ['', [Validators.required, Validators.minLength(2), Validators.maxLength(40)]  ],
-		  cp : ['',[Validators.required, Validators.pattern] ],
-      poblacion : ['', [Validators.required, Validators.minLength(2), Validators.maxLength(25)] ],
-      provincia : ['', [Validators.required, Validators.minLength(2), Validators.maxLength(25)] ],
-      pais : ['', [Validators.required, Validators.minLength(2), Validators.maxLength(25)] ],
-      contactoPrin : ['', [Validators.required, Validators.minLength(2), Validators.maxLength(40)] ],
-      tlfPrin : ['', [Validators.required, Validators.pattern] ],
-      movilPrin : ['', [Validators.required, Validators.pattern] ],
-      mailPrin : ['', [Validators.required, Validators.email] ],
-      contactoSec : ['', [Validators.minLength(2), Validators.maxLength(40 )] ],
-      tlfSec : ['', [Validators.pattern] ],
-      movilSec : ['', [Validators.pattern] ],
-      mailSec : ['', [Validators.email] ],
+      descripcion : ['', [Validators.required] ],
+
       clientSelect : ['', []]
 
     });
 
-    this.headquaterForm.valueChanges
+    this.projectForm.valueChanges
       .subscribe(data => this.onValueChanged(data));
 
     this.onValueChanged();
   }
 
   onValueChanged(data?: any) {
-    if (!this.headquaterForm) { return; }
+    if (!this.projectForm) { return; }
 
-    const form = this.headquaterForm;
+    const form = this.projectForm;
 
     for (const field in this.formErrors) {
       if (this.formErrors.hasOwnProperty(field)) {
@@ -134,27 +108,13 @@ export class ProjectDialogComponent implements OnInit {
   }
 
   onSubmit() {
-    this.headquater.nombre = this.headquaterForm.controls.nombre.value;
-    this.headquater.cif = this.headquaterForm.controls.cif.value;
+    this.project.nombre = this.projectForm.controls.nombre.value;
+    this.project.descripcion = this.projectForm.controls.cif.value;
 
-    this.headquater.direccion.calle = this.headquaterForm.controls.calle.value;
-    this.headquater.direccion.cp = this.headquaterForm.controls.cp.value;
-    this.headquater.direccion.pais = this.headquaterForm.controls.pais.value;
-    this.headquater.direccion.poblacion = this.headquaterForm.controls.poblacion.value;
-    this.headquater.direccion.provincia = this.headquaterForm.controls.provincia.value;
-
-    this.headquater.listaContactos[0].nombre = this.headquaterForm.controls.contactoPrin.value;
-    this.headquater.listaContactos[0].telefono1 = this.headquaterForm.controls.tlfPrin.value;
-    this.headquater.listaContactos[0].email = this.headquaterForm.controls.mailPrin.value;
-    this.headquater.listaContactos[0].telefono2 = this.headquaterForm.controls.movilPrin.value;
-
-    this.selectedClientName = this.headquaterForm.controls.clientSelect.value;
+    this.selectedClientName = this.projectForm.controls.clientSelect.value;
     
 
-    
-  
-
-    this.headquaterForm.reset({
+    this.projectForm.reset({
       nombre : '',
       cif : '',
       calle : '',
@@ -169,25 +129,25 @@ export class ProjectDialogComponent implements OnInit {
       clientSelect : ''
     });
 
-    this.headquaterFormDirective.resetForm();
+    this.projectFormDirective.resetForm();
 
     
-    this.toServerHeadquater();
+    this.toServerProject();
   }
 
-  toServerHeadquater(){
+  toServerProject(){
     console.log(this.selectedClientName);
 
     //this.headquaterService.postHeadquater(this.headquater).subscribe();
 
     this.clientService.getClient(this.selectedClientName).subscribe(data => {
-      this.headquater.cliente = data;
+      this.project.cliente = data;
 
 
     if(this.selectedOperation == 'edit'){
-      this.headquaterService.putHeadquater(this.headquater).subscribe();
+      this.projectService.putProject(this.project).subscribe();
     }else{
-      this.headquaterService.postHeadquater(this.headquater).subscribe();
+      this.projectService.postProject(this.project).subscribe();
     }
 
     });

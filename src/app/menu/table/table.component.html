@@ -211,7 +211,7 @@
 
   <ng-container matColumnDef="NombreCliente">
     <th mat-header-cell *matHeaderCellDef> Nombre cliente </th>
-    <td mat-cell *matCellDef="let project"> {{project.client.razonSocial}} </td>
+    <td mat-cell *matCellDef="let project"> {{project.cliente?project.cliente.razonSocial:''}} </td>
   </ng-container>
 
   <ng-container matColumnDef="Accion">

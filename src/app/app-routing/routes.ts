@@ -5,6 +5,7 @@ import { AdministracionSubmenuComponent } from '../menu/administracion-submenu/a
 import { SeguimientoSubmenuComponent } from '../menu/seguimiento-submenu/seguimiento-submenu.component';
 import { UsersSubmenuComponent } from '../menu/users-submenu/users-submenu.component';
 import { TableComponent } from '../menu/table/table.component';
+import { LoginPageComponent } from '../login-page/login-page.component';
 
 export const routes: Routes = [
   { path: 'home',  component: MenuComponent },
@@ -12,5 +13,6 @@ export const routes: Routes = [
   { path: 'track',     component: SeguimientoSubmenuComponent },
   { path: 'user',     component: UsersSubmenuComponent },
   { path: 'administration/:type', component : TableComponent},
-  { path: '', redirectTo: '/home', pathMatch: 'full' }
+  { path: '', redirectTo: '/home', pathMatch: 'full' },
+  { path: 'login',  component: LoginPageComponent },
 ];
