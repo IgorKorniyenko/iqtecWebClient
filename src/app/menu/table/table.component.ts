@@ -21,6 +21,10 @@ import { UserDialogComponent } from '../crud-components/dialogs/user-dialog/user
 import { UserService } from 'src/app/services/user.service';
 import { RequestService } from 'src/app/services/request.service';
 import { RequestDialogComponent } from '../crud-components/dialogs/request-dialog/request-dialog.component';
+import { Tracking } from 'src/app/shared/models/tracking';
+import { TrackingService } from 'src/app/services/tracking.service';
+import { StateService } from 'src/app/services/state.service';
+import { State } from 'src/app/shared/models/state';
 
 @Component({
   selector: 'app-table',
@@ -40,6 +44,9 @@ export class TableComponent implements OnInit {
   transports!: Transport[];
   projects!: Project[];
   requests!: Request[];
+  tracks!: Tracking[];
+
+  userRol!: string;
 
   starterUser: User = new User();
   starterClient : Client = new Client();
@@ -63,11 +70,16 @@ export class TableComponent implements OnInit {
     private projectService: ProjectService,
     private userService: UserService,
     private requestService: RequestService,
+    private trackService: TrackingService,
+    private stateService: StateService,
     public dialog: MatDialog) { }
 
   ngOnInit(): void {
     this.selectedTypeToSingular();
     this.chargeObjects();
+
+    this.userRol = localStorage.getItem("role") as string;
+    console.log(this.userRol)
   }
 
   chargeObjects() {
@@ -128,6 +140,16 @@ export class TableComponent implements OnInit {
 
         this.userService.getUsers().subscribe(data => {
           this.users = data;
+          this.dataSource = new MatTableDataSource(data);
+        });
+
+        break;
+
+        case 'Seguimientos':
+        this.displayedColumns = ["Id", "Fecha", "Estado", "Usuario", "Accion"];
+
+        this.trackService.getTracks().subscribe(data => {
+          this.tracks = data;
           this.dataSource = new MatTableDataSource(data);
         });
 
@@ -291,4 +313,27 @@ export class TableComponent implements OnInit {
       console.log(`Dialog result: ${result}`);
     });
   }
+
+
+  changeState(track: Tracking){
+
+    var stateList: State[];
+
+    this.stateService.getAll().subscribe( data => {
+
+      stateList = data;
+
+      var statePosition = track.estado.idEstado;
+
+      if(statePosition != 6){
+        track.estado = stateList.find( state => state.idEstado == (statePosition + 1)) as State; 
+      }
+
+      this.trackService.putTrack(track).subscribe();
+    })
+
+    
+  }
+  
 }
+

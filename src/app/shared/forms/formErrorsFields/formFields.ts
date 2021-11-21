@@ -64,3 +64,9 @@ export const CLIENTFORMFIELDS = {
     'descripcion': '',
     'clienteSelect': ''
   }
+
+  export const USERFORMFIELDS = {
+    'nombreUsuario': '',
+    'password': '',
+    'rol': ''
+  }

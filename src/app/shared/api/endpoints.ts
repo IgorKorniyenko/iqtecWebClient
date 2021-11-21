@@ -48,3 +48,9 @@ export const USERSENDPOINTS = new Map([
     ["delete", "auth/eliminar/"],
     ["update", "auth/actualizar"]
 ]);
+
+export const TRACKINGENDPOINTS = new Map([
+    ["getall", "Iqtec/seguimiento/consultar"],
+    ["getbyname", "auth/nombre/"],
+    ["update", "Iqtec/seguimiento/actualizar"]
+]);

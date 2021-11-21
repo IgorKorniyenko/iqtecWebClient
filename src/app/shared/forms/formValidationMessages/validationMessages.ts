@@ -193,3 +193,17 @@ export const CLIENTVALIDATIONMESSAGES = {
       'required':      'Calle es requerida.'
     }
   }
+
+  export const USERVALIDATIONMESSAGES = {
+    'nombreUsuario': {
+      'required':      'Nombre de usuario es requerido.',
+      'minlength':     'Nombre de usuario tiene que tener al menos 2 caracteres.',
+      'maxlength':     'Nombre de usuario puede tener 25 caracteres como maximo.'
+    },
+    'password': {
+      'required':      'Contraseña es requerida.'
+    },
+    'rol': {
+      'required':      'Rol es requerido.'
+    }
+  }

@@ -36,25 +36,34 @@ export class LoginPageComponent implements OnInit {
     // this.username = this.loginForm.controls.username.value;
     // this.password = this.loginForm.controls.password.value;
 
-    this.user.nombreUsuario = this.username;
-    this.user.password = this.password;
+    var loginData = new User();
 
-    this.login();
+    //this.user.nombreUsuario = this.username;
+    
+    loginData.nombreUsuario = this.username;
+    loginData.password = this.password;
+
+    this.login(loginData);
   }
 
-  login(){
-    this.userService.login(this.user).subscribe(data => {
+  login(user: User){
+    this.userService.login(user).subscribe(data => {
       if(data){
         console.log(data);
 
         this.user.roles[0].rolNombre = data.authorities[0]?data.authorities[0].authority:"";
+        this.user.nombreUsuario = data.nombreUsuario;
 
         console.log(this.user);
 
         this.userService.setToken(data.token);
 
-        
         this.loginSucceful = true;
+
+        localStorage.setItem("role", data.authorities[0] ? data.authorities[0].authority : "TECNICO");
+        localStorage.setItem("user", data.nombreUsuario);
+        
+        console.log(localStorage.getItem("role"))
       }
     });
 

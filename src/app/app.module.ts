@@ -55,6 +55,7 @@ import { ProjectService } from './services/project.service';
 
 import { CookieService } from 'ngx-cookie-service';
 import { AuthInterceptor } from './services/authInterceptor';
+import { TrackDialogComponent } from './menu/crud-components/dialogs/track-dialog/track-dialog.component';
 
 
 @NgModule({
@@ -78,7 +79,8 @@ import { AuthInterceptor } from './services/authInterceptor';
     TransportDialogComponent,
     ProjectDialogComponent,
     RequestDialogComponent,
-    UserDialogComponent
+    UserDialogComponent,
+    TrackDialogComponent
   ],
   imports: [
     BrowserModule,

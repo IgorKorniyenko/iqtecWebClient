@@ -1,1 +1,88 @@
-<p>user-dialog works!</p>
+
+<!-- Formulario para registrar una nueva solicitud -->
+<div *ngIf="selectedOperation == 'create'">
+    <h3>Registrar solicitud</h3>
+
+<form novalidate [formGroup]="userForm" #fform="ngForm" (ngSubmit)="onSubmit()">
+
+    
+    <p>
+        <mat-form-field class="half-width" >
+            <mat-label>Rol: </mat-label>
+            <mat-select [(value)]="selectedRoleName" > 
+                <mat-option *ngFor="let role of roleTypes" [value]="role" >{{role}}</mat-option>
+            </mat-select> 
+        </mat-form-field>
+
+    </p>
+    <p>
+        <mat-form-field class="half-width">
+            <input matInput formControlName="nombreUsuario" placeholder="Nombre de usuario" type="text" required>
+            <!-- <mat-error *ngIf="formErrors.nombre">{{formErrors.nombre}}</mat-error> -->
+        </mat-form-field>
+    
+        <mat-form-field class="half-width">
+            <input matInput formControlName="password" placeholder="Contraseña" type="password"  required>
+            <!-- <mat-error *ngIf="formErrors.cif">{{formErrors.cif}}</mat-error> -->
+        </mat-form-field>
+    
+        
+    </p>
+
+
+
+  <button type="submit" mat-button class="background-primary text-floral-white">Submit</button>
+  
+</form>
+</div>
+
+
+
+<!-- Formulario para editar una nueva solicitud -->
+<div *ngIf="selectedOperation == 'edit'">
+    <h3>Editar usuario</h3>
+
+<form novalidate [formGroup]="userForm" #fform="ngForm" (ngSubmit)="onSubmit()">
+
+    <p>
+        <mat-form-field class="half-width" >
+            <mat-label>Rol: </mat-label>
+            <mat-select [(value)]="selectedRoleName" > 
+                <mat-option *ngFor="let role of roleTypes" [value]="role" >{{role}}</mat-option>
+            </mat-select> 
+        </mat-form-field>
+
+    </p>
+    <p>
+        <mat-form-field class="half-width">
+            <input matInput formControlName="nombreUsuario" placeholder="Nombre de usuario" type="text" required>
+            <!-- <mat-error *ngIf="formErrors.nombre">{{formErrors.nombre}}</mat-error> -->
+        </mat-form-field>
+    
+        <mat-form-field class="half-width">
+            <input matInput formControlName="password" placeholder="Contraseña" type="date"  required>
+            <!-- <mat-error *ngIf="formErrors.cif">{{formErrors.cif}}</mat-error> -->
+        </mat-form-field>
+    
+        
+    </p>
+
+  <button type="submit" mat-button class="background-primary text-floral-white">Submit</button>
+  
+</form>
+</div>
+
+
+
+
+
+<!-- HTML para mostrar la solicitud -->
+<div *ngIf="selectedOperation == 'show'">
+    <h1>Visualizar usuario</h1>
+
+
+    <p>Username: {{user.nombreUsuario}}</p>
+    <p>Rol: {{user.roles[0] ? user.roles[0].rolNombre : 'Tecnico'}}</p>
+
+</div>
+

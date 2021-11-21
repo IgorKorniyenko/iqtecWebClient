@@ -7,7 +7,7 @@ import { RequestService } from 'src/app/services/request.service';
 import { TransportService } from 'src/app/services/transport.service';
 import { REQUESTFORMFIELDS } from 'src/app/shared/forms/formErrorsFields/formFields';
 import { REQUESTVALIDATIONMESSAGES } from 'src/app/shared/forms/formValidationMessages/validationMessages';
-import { MaterialTypes } from 'src/app/shared/models/enums';
+import { MaterialTypes, StateName } from 'src/app/shared/models/enums';
 import { Headquater } from 'src/app/shared/models/heaquater';
 import { Material } from 'src/app/shared/models/material';
 import { Project } from 'src/app/shared/models/project';
@@ -16,6 +16,10 @@ import { Transport } from 'src/app/shared/models/transport';
 import { MaterialList } from 'src/app/shared/models/enums';
 import { MaterialType } from 'src/app/shared/models/materialType';
 import { TipoService } from 'src/app/services/tipo.service';
+import { Tracking } from 'src/app/shared/models/tracking';
+import { UserService } from 'src/app/services/user.service';
+import { StateService } from 'src/app/services/state.service';
+import { State } from 'src/app/shared/models/state';
 
 @Component({
   selector: 'app-request-dialog',
@@ -61,7 +65,9 @@ export class RequestDialogComponent implements OnInit {
         private transportService: TransportService,
         private headquaterService: HeadquaterService,
         private projectService: ProjectService,
-        private materialTypeService: TipoService) {
+        private materialTypeService: TipoService,
+        private userService: UserService,
+        private stateService: StateService) {
 
           this.selectedOperation = this.data.operation;
     
@@ -270,7 +276,32 @@ export class RequestDialogComponent implements OnInit {
 
   registerRequest(){
     console.log(this.request);
-    this.requestService.postRequest(this.request).subscribe();
+    var track = new Tracking();
+
+    this.userService.getUser(localStorage.getItem("user") as string).subscribe(data => {
+      track.usuario = data;
+
+      track.fecha = new Date();
+
+      this.stateService.getAll().subscribe(data => {
+        track.estado = data.find(a => a.idEstado == 1) as State;
+
+        console.log(track.estado)
+
+        this.request.seguimientos.push(track);
+
+        this.requestService.postRequest(this.request).subscribe();
+      });
+
+      
+
+      console.log(this.request);
+
+      
+     });
+
+
+    
     
   }
 
