@@ -1,6 +1,6 @@
 import { Component, Inject, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ClientService } from 'src/app/services/client.service';
 import { ProjectService } from 'src/app/services/project.service';
 import { PROJECTFORMFIELDS } from 'src/app/shared/forms/formErrorsFields/formFields';
@@ -32,7 +32,8 @@ export class ProjectDialogComponent implements OnInit {
   constructor(@Inject(MAT_DIALOG_DATA) public data: any,
         private fb : FormBuilder, 
         private projectService: ProjectService,
-        private clientService: ClientService) {
+        private clientService: ClientService,
+        private dialogRef: MatDialogRef<ProjectDialogComponent>) {
 
 
           this.clientService.getClients().subscribe(data => {
@@ -109,7 +110,7 @@ export class ProjectDialogComponent implements OnInit {
 
   onSubmit() {
     this.project.nombre = this.projectForm.controls.nombre.value;
-    this.project.descripcion = this.projectForm.controls.cif.value;
+    this.project.descripcion = this.projectForm.controls.descripcion.value;
 
     this.selectedClientName = this.projectForm.controls.clientSelect.value;
     
@@ -133,6 +134,8 @@ export class ProjectDialogComponent implements OnInit {
 
     
     this.toServerProject();
+
+    this.dialogRef.close();
   }
 
   toServerProject(){

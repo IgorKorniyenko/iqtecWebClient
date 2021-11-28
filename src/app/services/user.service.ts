@@ -23,6 +23,10 @@ export class UserService {
     return this.cookies.get("token");
   }
 
+  removeToken(){
+    this.cookies.delete("token")
+  }
+
   getUsers(): Observable<User[]>{
     return this.http.get<User[]>(BASEURL + USERSENDPOINTS.get('getall'));
   }
@@ -31,12 +35,12 @@ export class UserService {
     return this.http.get<User>(BASEURL + USERSENDPOINTS.get('getbyname') + name)
   }
 
-  postUser(transport: User): Observable<User>{
-    return this.http.post<User>(BASEURL + USERSENDPOINTS.get('create'), transport);
+  postUser(user: any): Observable<User>{
+    return this.http.post<User>(BASEURL + USERSENDPOINTS.get('create'), user);
   }
 
-  putUser(transport: User): Observable<User>{
-    return this.http.put<User>(BASEURL + USERSENDPOINTS.get('update'), transport);
+  putUser(user: User): Observable<User>{
+    return this.http.put<User>(BASEURL + USERSENDPOINTS.get('update'), user);
   }
 
   deleteUser(name: string): Observable<User>{

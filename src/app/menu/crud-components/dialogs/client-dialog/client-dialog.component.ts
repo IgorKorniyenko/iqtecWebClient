@@ -1,4 +1,4 @@
-import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { Inject } from '@angular/core';
 import { Component, OnInit, ViewChild, Input } from '@angular/core';
 import { ClientService } from '../../../../services/client.service';
@@ -27,7 +27,10 @@ export class ClientDialogComponent implements OnInit {
 
   selectedOperation!: string;
 
-  constructor(@Inject(MAT_DIALOG_DATA) public data: any,private fb : FormBuilder, private clienteService : ClientService) { 
+  constructor(@Inject(MAT_DIALOG_DATA) public data: any,
+                                        private fb : FormBuilder, 
+                                        private clienteService : ClientService,
+                                        private dialogRef: MatDialogRef<ClientDialogComponent>) { 
     
     this.selectedOperation = this.data.operation;
     
@@ -163,6 +166,8 @@ export class ClientDialogComponent implements OnInit {
 
     this.toServerUser();
     console.log(this.client.listaContactos[0].email);
+
+    this.dialogRef.close();
   }
 
   toServerUser(){

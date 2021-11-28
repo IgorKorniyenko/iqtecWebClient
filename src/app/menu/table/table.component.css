@@ -2,11 +2,47 @@ table {
     width: 100%;
   }
 
+  h1{
+    text-align: center;
+    font-size: 3em;
+  }
   .mat-column-Id {
     word-wrap: break-word !important;
     white-space: unset !important;
     flex: 0 0 8% !important;
-    width: 5% !important;
+    width: 10% !important;
+   
+  }
+
+  .mat-column-Ciudad {
+    word-wrap: break-word !important;
+    white-space: unset !important;
+    flex: 0 0 8% !important;
+    width: 20% !important;
+   
+  }
+
+  .mat-column-Telefono {
+    word-wrap: break-word !important;
+    white-space: unset !important;
+    flex: 0 0 8% !important;
+    width: 20% !important;
+   
+  }
+
+  .mat-column-RazonSocial {
+    word-wrap: break-word !important;
+    white-space: unset !important;
+    flex: 0 0 8% !important;
+    width: 25% !important;
+   
+  }
+
+  .mat-column-Accion {
+    word-wrap: break-word !important;
+    white-space: unset !important;
+    flex: 0 0 8% !important;
+    width: 20% !important;
    
   }
 
@@ -18,4 +54,9 @@ table {
   #filter{
     width: 40%;
     margin-right: 40%;
+  }
+
+  .header {
+    font-size: 1em;
+    font-weight: bold;
   }

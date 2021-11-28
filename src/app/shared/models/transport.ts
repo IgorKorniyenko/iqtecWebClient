@@ -13,6 +13,6 @@ export class Transport {
         this.nombre = "";
         this.cif = "";
         this.direccion = new Direccion();
-        this.listaContactos = [];
+        this.listaContactos = [new Contacto()];
     }
 }

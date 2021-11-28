@@ -12,7 +12,8 @@
             <input matInput formControlName="cif" placeholder="Cif" type="text" pattern="[0-9]{8}[A-Za-z]{1}" required>
             <mat-error *ngIf="formErrors.cif">{{formErrors.cif}}</mat-error>
         </mat-form-field>
-    
+    </p>
+    <p>
         <mat-form-field class="half-width">
             <input matInput formControlName="calle" placeholder="Calle" type="text" required>
             <mat-error *ngIf="formErrors.calle">{{formErrors.calle}}</mat-error>
@@ -52,8 +53,7 @@
             <input matInput formControlName="tlfPrin" placeholder="Telefono principal" pattern = "[0-9]{9}" type="text" required>
             <mat-error *ngIf="formErrors.tlfPrin">{{formErrors.tlfPrin}}</mat-error>
         </mat-form-field>
-    </p>
-    <p>
+   
         <mat-form-field class="half-width">
             <input matInput formControlName="movilPrin" placeholder="Movil principal" pattern = "[0-9]{9}" type="text" required>
             <mat-error *ngIf="formErrors.mailPrin">{{formErrors.mailPrin}}</mat-error>
@@ -77,8 +77,7 @@
             <input matInput formControlName="tlfSec" placeholder="Telefono sdecundario" pattern = "[0-9]{9}" type="text">
             <mat-error *ngIf="formErrors.tlfSec">{{formErrors.tlfSec}}</mat-error>
         </mat-form-field>
-    </p>
-    <p>
+   
         <mat-form-field class="half-width">
             <input matInput formControlName="movilSec" placeholder="Movil sdecundario" pattern = "[0-9]{9}" type="number">
             <mat-error *ngIf="formErrors.movilSec">{{formErrors.movilSec}}</mat-error>
@@ -90,7 +89,7 @@
         </mat-form-field>
     </p>
 
-  <button type="submit" mat-button class="background-primary text-floral-white">Submit</button>
+  <button type="submit" mat-button class="text-floral-white">Submit</button>
   
 </form>
 </div>
@@ -98,26 +97,33 @@
 
 <!-- HTML para mostrar al cliente -->
 <div *ngIf="selectedOperation == 'show'">
-    <h1>Visualizar cliente</h1>
+
+  
+    <h1><b>Visualizar cliente</b></h1>
 
 
-    <p>Nombre/Razon social: {{client.razonSocial}}</p>
-    <p>Cif: {{client.cif}}</p>
+    <p><b>Nombre/Razon social: </b>{{client.razonSocial}} &emsp;&nbsp; <b>Cif: </b>{{client.cif}}</p>
+    
 
-    <h3>Dirección</h3>
-    <p>Ciudad: {{client.direccion.poblacion}}</p>
-    <p>Provincia: {{client.direccion.provincia}}</p>
-    <p>Cod. Postal: {{client.direccion.cp}}</p>
-    <p>Calle: {{client.direccion.calle}}</p>
-    <p>Pais: {{client.direccion.pais}}</p>
+    <h3><b>Dirección</b></h3>
+    <p><b>Ciudad:</b> {{client.direccion.poblacion}} &emsp;&nbsp; <b>Provincia:</b> {{client.direccion.provincia}}</p>
+    <p><b>Cod. Postal:</b> {{client.direccion.cp}}  &emsp;&nbsp; <b>Calle:</b> {{client.direccion.calle}}</p>
+   
+    <p><b>Pais:</b> {{client.direccion.pais}}</p>
 
     <br/>
 
+    &emsp;
+
     <h3>Contactos</h3>
-    <p>Nombre: {{client.listaContactos[0].nombre}}</p>
-    <p>Telefono 1: {{client.listaContactos[0].telefono1}}</p>
-    <p>Telefono 2: {{client.listaContactos[0].telefono2}}</p>
-    <p>Email: {{client.listaContactos[0].email}}</p>
+    <div *ngFor="let contacto of client.listaContactos">
+        <p><b>Nombre:</b> {{contacto.nombre}}</p>
+        <p><b>Telefono 1:</b> {{contacto.telefono1}}</p>
+        <p *ngIf="contacto.telefono2"><b>Telefono 2:</b> {{contacto.telefono2}}</p>
+        <p><b>Email:</b> {{contacto.email}}</p>
+
+    </div>
+    
 
 </div>
 

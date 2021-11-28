@@ -15,6 +15,7 @@ export class LoginPageComponent implements OnInit {
   password : string;
   loginSucceful : boolean = false;
   user: User;
+  errorMessage! : string;
 
   constructor(private fb : FormBuilder,
     private userService: UserService) {
@@ -47,9 +48,13 @@ export class LoginPageComponent implements OnInit {
   }
 
   login(user: User){
-    this.userService.login(user).subscribe(data => {
-      if(data){
-        console.log(data);
+
+    console.log("user before")
+
+    this.userService.login(user).toPromise()
+    .then(data=> {
+
+        console.log("user after")
 
         this.user.roles[0].rolNombre = data.authorities[0]?data.authorities[0].authority:"";
         this.user.nombreUsuario = data.nombreUsuario;
@@ -63,9 +68,40 @@ export class LoginPageComponent implements OnInit {
         localStorage.setItem("role", data.authorities[0] ? data.authorities[0].authority : "TECNICO");
         localStorage.setItem("user", data.nombreUsuario);
         
-        console.log(localStorage.getItem("role"))
-      }
+        console.log(localStorage.getItem("role"));
+        
+      
+    })
+    .catch(error => {
+      this.errorMessage = 'Usuario o contraseña incorrectos';
     });
+
+
+   
+    // this.userService.login(user).subscribe(data => {
+    //   if(data){
+    //     console.log(data);
+
+    //     if(data.status == 401){
+    //       this.errorMessage = 'Usuario o contraseña incorrectos';
+    //     }
+        
+
+    //     this.user.roles[0].rolNombre = data.authorities[0]?data.authorities[0].authority:"";
+    //     this.user.nombreUsuario = data.nombreUsuario;
+
+    //     console.log(this.user);
+
+    //     this.userService.setToken(data.token);
+
+    //     this.loginSucceful = true;
+
+    //     localStorage.setItem("role", data.authorities[0] ? data.authorities[0].authority : "TECNICO");
+    //     localStorage.setItem("user", data.nombreUsuario);
+        
+    //     console.log(localStorage.getItem("role"))
+    //   }
+    // });
 
    
     //Llamamos a la api para comprobar datos

@@ -2,6 +2,6 @@ export enum RoleName {TECNICO, ADMINISTRADOR};
 
 export enum MaterialTypes{HDD , PORTATIL , PC , SERVIDOR , TFT , TELEFONO , TABLET , IMPRESORA , CAJA_VARIOS };
 
-export const MaterialList = [ "HDD", "PORTATIL", "PC", "SERVIDOR", "TFT", "TELEFONO", "TABLET", "IMPRESORA", "CAJA VARIOS"];
+export const MaterialList = [ "HDD", "PORTATIL", "PC", "SERVIDOR", "TFT", "TELEFONO", "TABLET", "IMPRESORA", "CAJA_VARIOS"];
 
 export enum StateName {SOLICITADO, RECIBIDO, PRODUCCION, PROCESADO, INFORME, FINALIZADO};

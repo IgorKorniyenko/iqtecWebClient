@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { UserService } from '../services/user.service';
 
 @Component({
   selector: 'app-navbar',
@@ -15,13 +16,17 @@ export class NavbarComponent implements OnInit {
   
   @Output() logOutEmitter = new EventEmitter<boolean>();
 
-  logOut(){
-    this.logOutEmitter.emit(false);
-  }
 
-  constructor() { }
+  constructor(private userService: UserService) { }
 
   ngOnInit(): void {
   }
 
+  
+  logOut(){
+    this.logOutEmitter.emit(false);
+
+    this.userService.removeToken();
+
+  }
 }

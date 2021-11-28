@@ -1,7 +1,7 @@
 
-<!-- Formulario para registrar una nueva solicitud -->
+<!-- Formulario para registrar un usuario-->
 <div *ngIf="selectedOperation == 'create'">
-    <h3>Registrar solicitud</h3>
+    <h3>Registrar usuario</h3>
 
 <form novalidate [formGroup]="userForm" #fform="ngForm" (ngSubmit)="onSubmit()">
 
@@ -9,7 +9,7 @@
     <p>
         <mat-form-field class="half-width" >
             <mat-label>Rol: </mat-label>
-            <mat-select [(value)]="selectedRoleName" > 
+            <mat-select formControlName="rol" > 
                 <mat-option *ngFor="let role of roleTypes" [value]="role" >{{role}}</mat-option>
             </mat-select> 
         </mat-form-field>
@@ -38,7 +38,7 @@
 
 
 
-<!-- Formulario para editar una nueva solicitud -->
+<!-- Formulario para editar un usuario -->
 <div *ngIf="selectedOperation == 'edit'">
     <h3>Editar usuario</h3>
 
@@ -58,11 +58,10 @@
             <input matInput formControlName="nombreUsuario" placeholder="Nombre de usuario" type="text" required>
             <!-- <mat-error *ngIf="formErrors.nombre">{{formErrors.nombre}}</mat-error> -->
         </mat-form-field>
-    
+<!--     
         <mat-form-field class="half-width">
-            <input matInput formControlName="password" placeholder="Contraseña" type="date"  required>
-            <!-- <mat-error *ngIf="formErrors.cif">{{formErrors.cif}}</mat-error> -->
-        </mat-form-field>
+            <input matInput formControlName="password" placeholder="Contraseña" type="password"  required>
+        </mat-form-field> -->
     
         
     </p>

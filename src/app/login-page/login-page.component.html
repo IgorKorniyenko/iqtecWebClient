@@ -34,6 +34,7 @@
         placeholder="Password"
         required="required"
       />
+      <p >{{errorMessage}}</p>
       <button type="submit" (click)="onSubmit()" routerLink="/home">Log in</button>
     </form>
   </div>

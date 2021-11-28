@@ -1,6 +1,6 @@
 import { Component, Inject, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { ClientService } from 'src/app/services/client.service';
 import { HeadquaterService } from 'src/app/services/headquater.service';
 import { HEADQUATERFORMFIELDS } from 'src/app/shared/forms/formErrorsFields/formFields';
@@ -31,7 +31,8 @@ export class HeadquaterDialogComponent implements OnInit {
   constructor(@Inject(MAT_DIALOG_DATA) public data: any,
         private fb : FormBuilder, 
         private headquaterService: HeadquaterService,
-        private clientService: ClientService) {
+        private clientService: ClientService,
+        private dialogRef: MatDialogRef<HeadquaterDialogComponent>) {
 
 
           this.clientService.getClients().subscribe(data => {
@@ -176,6 +177,8 @@ export class HeadquaterDialogComponent implements OnInit {
 
     
     this.toServerHeadquater();
+
+    this.dialogRef.close();
   }
 
   toServerHeadquater(){

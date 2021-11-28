@@ -51,6 +51,5 @@ export const USERSENDPOINTS = new Map([
 
 export const TRACKINGENDPOINTS = new Map([
     ["getall", "Iqtec/seguimiento/consultar"],
-    ["getbyname", "auth/nombre/"],
     ["update", "Iqtec/seguimiento/actualizar"]
 ]);

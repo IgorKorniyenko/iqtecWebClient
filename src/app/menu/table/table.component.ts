@@ -1,4 +1,4 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, Input, OnInit } from '@angular/core';
 import { MatTableDataSource } from '@angular/material/table';
 import { Client } from 'src/app/shared/models/client';
 
@@ -72,7 +72,8 @@ export class TableComponent implements OnInit {
     private requestService: RequestService,
     private trackService: TrackingService,
     private stateService: StateService,
-    public dialog: MatDialog) { }
+    public dialog: MatDialog,
+    private changeDetectorRefs: ChangeDetectorRef) { }
 
   ngOnInit(): void {
     this.selectedTypeToSingular();
@@ -85,7 +86,7 @@ export class TableComponent implements OnInit {
   chargeObjects() {
     switch (this.selectedTableType) {
       case 'Clientes':
-        this.displayedColumns = ["Id", "Razon Social", "Ciudad", "Telefono", "Accion"];
+        this.displayedColumns = ["Id", "RazonSocial", "Ciudad", "Telefono", "Accion"];
 
         this.clienteService.getClients().subscribe(data => {
           this.clients = data;
@@ -95,7 +96,7 @@ export class TableComponent implements OnInit {
         break;
 
       case 'Sedes':
-        this.displayedColumns = ["Id", "Razon Social", "Ciudad", "Telefono", "Accion"];
+        this.displayedColumns = ["Id", "RazonSocial", "Ciudad", "Telefono", "Accion"];
 
         this.headquaterService.getHeadquaters().subscribe(data => {
           this.headquaters = data;
@@ -105,7 +106,7 @@ export class TableComponent implements OnInit {
         break;
 
       case 'Transportes':
-        this.displayedColumns = ["Id", "Razon Social", "Ciudad", "Telefono", "Accion"];
+        this.displayedColumns = ["Id", "RazonSocial", "Ciudad", "Telefono", "Accion"];
 
         this.transportService.getTransports().subscribe(data => {
           this.transports = data;
@@ -115,7 +116,7 @@ export class TableComponent implements OnInit {
         break;
 
       case 'Proyectos':
-        this.displayedColumns = ["Id", "Razon Social", "NombreCliente", "Accion"];
+        this.displayedColumns = ["Id", "RazonSocial", "NombreCliente", "Accion"];
 
         this.projectService.getProjects().subscribe(data => {
           this.projects = data;
@@ -163,11 +164,14 @@ export class TableComponent implements OnInit {
     this.dataSource.filter = filterValue.trim().toLowerCase();
   }
 
+  
+
 
   deleteData(name: string, type: string) {
     switch(type){
       case 'client':
         this.clienteService.deleteClient(name).subscribe();
+        
         break;
       
       case 'headquater':
@@ -223,7 +227,7 @@ export class TableComponent implements OnInit {
   openClientDialog(operationType: string, object: any) {
 
     const dialogRef = this.dialog.open(ClientDialogComponent,{
-      
+     
       data: {
         operation: operationType,
         object: object
@@ -231,7 +235,7 @@ export class TableComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log(`Dialog result: ${result}`);
+      this.chargeObjects();
     });
   }
 
@@ -246,7 +250,7 @@ export class TableComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log(`Dialog result: ${result}`);
+      this.chargeObjects();
     });
   }
 
@@ -261,7 +265,7 @@ export class TableComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log(`Dialog result: ${result}`);
+      this.chargeObjects();
     });
   }
 
@@ -276,7 +280,7 @@ export class TableComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log(`Dialog result: ${result}`);
+      this.chargeObjects();
     });
   }
 
@@ -284,7 +288,7 @@ export class TableComponent implements OnInit {
   openRequestDialog(operationType: string, object: any) {
 
     const dialogRef = this.dialog.open(RequestDialogComponent,{
-      
+     
       data: {
         operation: operationType,
         object: object
@@ -292,7 +296,7 @@ export class TableComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log(`Dialog result: ${result}`);
+      this.chargeObjects();
     });
   }
 
@@ -310,7 +314,7 @@ export class TableComponent implements OnInit {
     });
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log(`Dialog result: ${result}`);
+      this.chargeObjects();
     });
   }
 

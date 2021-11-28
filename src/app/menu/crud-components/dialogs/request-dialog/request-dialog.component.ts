@@ -1,6 +1,6 @@
 import { Component, Inject, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder,FormControl, FormArray, FormGroup, Validators } from '@angular/forms';
-import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { HeadquaterService } from 'src/app/services/headquater.service';
 import { ProjectService } from 'src/app/services/project.service';
 import { RequestService } from 'src/app/services/request.service';
@@ -67,7 +67,8 @@ export class RequestDialogComponent implements OnInit {
         private projectService: ProjectService,
         private materialTypeService: TipoService,
         private userService: UserService,
-        private stateService: StateService) {
+        private stateService: StateService,
+        private dialogRef: MatDialogRef<RequestDialogComponent>) {
 
           this.selectedOperation = this.data.operation;
     
@@ -129,12 +130,14 @@ export class RequestDialogComponent implements OnInit {
       observaciones : [request.instrucciones.comentInventario,[Validators.required]],
 
       headquaterSelect : [request.sede.nombre,[Validators.required]],
-      projectSelect: ['', []],
-      transportSelect : ['',[Validators.required]],
+      projectSelect: [request.proyecto?request.proyecto.nombre:"", []],
+      transportSelect : [request.transporte.nombre,[Validators.required]],
 
       materiales: this.fb.array([])
     
     });
+
+    this.uploadMaterials();
   }
 
 
@@ -165,6 +168,21 @@ export class RequestDialogComponent implements OnInit {
   }
 
   ////////////////////////////////
+  uploadMaterials() : FormArray{
+
+    
+    for(var i=0; i<this.request.materiales.length; i++){
+      this.materials().push(
+      this.fb.group({
+        type: this.request.materiales[i].tipo.tipoMaterial,
+        quantity: this.request.materiales[i].cantidad,
+      }))
+    }
+
+    return this.materials();
+  }
+
+
   materials() : FormArray {
     return this.requestForm.get("materiales") as FormArray
   }
@@ -271,6 +289,8 @@ export class RequestDialogComponent implements OnInit {
 
 
     this.requestFormDirective.resetForm();
+
+    this.dialogRef.close();
   }
 
 

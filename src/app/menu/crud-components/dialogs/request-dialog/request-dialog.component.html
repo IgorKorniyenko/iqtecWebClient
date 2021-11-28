@@ -132,21 +132,21 @@
     <p>
         <mat-form-field class="half-width" >
             <mat-label>Proyecto: </mat-label>
-            <mat-select [(value)]="selectedProjectName" > 
+            <mat-select formControlName="projectSelect" > 
                 <mat-option *ngFor="let project of projectList" [value]="project.nombre" >{{project.nombre}}</mat-option>
             </mat-select> 
         </mat-form-field>
 
         <mat-form-field class="half-width">
             <mat-label>Sede: </mat-label>
-            <mat-select [(value)]="selectedHeadquaterName">
+            <mat-select formControlName="headquaterSelect">
                 <mat-option *ngFor="let headquater of headquatersList" [value]="headquater.nombre">{{headquater.nombre}}</mat-option>
             </mat-select> 
         </mat-form-field>
 
         <mat-form-field class="half-width">
             <mat-label>Transporte: </mat-label>
-            <mat-select [(value)]="selectedTransportName">
+            <mat-select formControlName="transportSelect">
                 <mat-option *ngFor="let transport of transportsList" [value]="transport.nombre">{{transport.nombre}}</mat-option>
             </mat-select> 
         </mat-form-field>
@@ -262,11 +262,11 @@
     <p *ngFor="let material of request.materiales">{{material.tipo.tipoMaterial + " " + material.cantidad}}</p>
     
     <br/>
-
+<div *ngIf="request.proyecto">
     <p>Proyecto: {{request.proyecto.nombre}}</p>
     <p>Sede: {{request.sede.nombre}}</p>
     <p>Transporte: {{request.transporte.nombre}}</p>
-
+</div>
     <br/>
 
     <h3>Instrucciones</h3>

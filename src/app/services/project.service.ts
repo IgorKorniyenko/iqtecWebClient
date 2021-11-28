@@ -19,12 +19,12 @@ export class ProjectService {
     return this.http.get<Project>(BASEURL + PROJECTENDPOINTS.get('getbyname') + name)
   }
 
-  postProject(transport: Project): Observable<Project>{
-    return this.http.post<Project>(BASEURL + PROJECTENDPOINTS.get('create'), transport);
+  postProject(project: Project): Observable<Project>{
+    return this.http.post<Project>(BASEURL + PROJECTENDPOINTS.get('create'), project);
   }
 
-  putProject(transport: Project): Observable<Project>{
-    return this.http.put<Project>(BASEURL + PROJECTENDPOINTS.get('update'), transport);
+  putProject(project: Project): Observable<Project>{
+    return this.http.put<Project>(BASEURL + PROJECTENDPOINTS.get('update'), project);
   }
 
   deleteProject(name: string): Observable<Project>{

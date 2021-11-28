@@ -1,6 +1,6 @@
 import { Component, Inject, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { TransportService } from 'src/app/services/transport.service';
 import { TRANSPORTFORMFIELDS } from 'src/app/shared/forms/formErrorsFields/formFields';
 import { TRANSPORTVALIDATIONMESSAGES } from 'src/app/shared/forms/formValidationMessages/validationMessages';
@@ -26,7 +26,8 @@ export class TransportDialogComponent implements OnInit {
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: any,
         private fb : FormBuilder, 
-        private transportService: TransportService) {
+        private transportService: TransportService,
+        private dialogRef: MatDialogRef<TransportDialogComponent>) {
 
           this.selectedOperation = this.data.operation;
     
@@ -159,6 +160,8 @@ export class TransportDialogComponent implements OnInit {
     this.transportFormDirective.resetForm();
 
     this.toServerTransport();
+
+    this.dialogRef.close();
   }
 
   toServerTransport(){

@@ -1,6 +1,6 @@
 import { Component, Inject, OnInit, ViewChild } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
 import { UserService } from 'src/app/services/user.service';
 import { USERFORMFIELDS } from 'src/app/shared/forms/formErrorsFields/formFields';
 import { USERVALIDATIONMESSAGES } from 'src/app/shared/forms/formValidationMessages/validationMessages';
@@ -30,7 +30,8 @@ export class UserDialogComponent implements OnInit {
 
   constructor(@Inject(MAT_DIALOG_DATA) public data: any,
         private fb : FormBuilder, 
-        private userService: UserService) {
+        private userService: UserService,
+        private dialogRef: MatDialogRef<UserDialogComponent>) {
 
           this.selectedOperation = this.data.operation;
     
@@ -49,11 +50,13 @@ export class UserDialogComponent implements OnInit {
 
   
   createFormEdit(user: User){
+
+    console.log(user)
     this.userForm = this.fb.group({
       nombreUsuario : [user.nombreUsuario, [Validators.required, Validators.minLength(2), Validators.maxLength(25)] ],
       password : [user.password, [Validators.required, Validators.pattern] ],
 
-      rol : [user.roles[0] ? user.roles[0].rolNombre : "", [Validators.required, Validators.minLength(2), Validators.maxLength(40)]  ]
+      rol : [user.roles[0]?user.roles[0].rolNombre : "", [Validators.required, Validators.minLength(2), Validators.maxLength(40)]  ]
     
     });
   }
@@ -101,12 +104,16 @@ export class UserDialogComponent implements OnInit {
   onSubmit() {
     this.user.nombreUsuario = this.userForm.controls.nombreUsuario.value;
     this.user.password = this.userForm.controls.password.value;
-    this.user.roles[0].rolNombre = this.userForm.controls.rol.value == 'Tecnico'? RoleName.TECNICO : RoleName.ADMINISTRADOR;
+
+    console.log(this.userForm.controls.rol.value)
+    this.user.roles[0].rolNombre = this.userForm.controls.rol.value ;
     
     
     this.resetUserForm();
    
     this.registerUser();
+
+    this.dialogRef.close();
   }
 
   resetUserForm(){
@@ -124,7 +131,14 @@ export class UserDialogComponent implements OnInit {
 
 
   registerUser(){
-    this.userService.postUser(this.user).subscribe();
+    let newUser = {
+      "nombreUsuario" : this.user.nombreUsuario,
+      "password" : this.user.password,
+      "roles" : [this.user.roles[0].rolNombre == "ADMINISTRADOR"? "admin":""]
+       
+   }
+
+    this.userService.postUser(newUser).subscribe();
     
   }
 
