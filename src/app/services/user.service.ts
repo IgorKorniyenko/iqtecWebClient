@@ -43,7 +43,7 @@ export class UserService {
     return this.http.put<User>(BASEURL + USERSENDPOINTS.get('update'), user);
   }
 
-  deleteUser(name: string): Observable<User>{
+  deleteUser(name: number): Observable<User>{
     return this.http.delete<User>(BASEURL + USERSENDPOINTS.get('delete') + name);
   }
 }

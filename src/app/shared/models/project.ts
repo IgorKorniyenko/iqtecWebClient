@@ -6,11 +6,13 @@ export class Project{
 	nombre: string;
 	descripcion: string;
 	cliente: Client;
+    activo: boolean;
 
     constructor(){
         this.idProyecto = 0;
         this.nombre = "";
         this.descripcion = "";
         this.cliente = new Client();
+        this.activo = false;
     }
 }

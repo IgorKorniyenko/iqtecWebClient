@@ -7,6 +7,7 @@ export class Tracking{
 	estado: State;
 	fecha: Date;
     usuario: User;
+    
 
     constructor(){
         this.idSeguimiento = 0;

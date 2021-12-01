@@ -18,6 +18,7 @@ export class Request{
 	transporte: Transport;
 	instrucciones: Instruction;
 	seguimientos: Tracking[];
+    activo: boolean;
 
     constructor(){
         this.idSolicitud = 0;
@@ -31,5 +32,6 @@ export class Request{
         this.transporte = new Transport();
         this.instrucciones = new Instruction();
         this.seguimientos = [];
+        this.activo = false;
     }
 }

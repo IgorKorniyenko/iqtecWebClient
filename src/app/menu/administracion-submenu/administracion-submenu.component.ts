@@ -41,4 +41,11 @@ export class AdministracionSubmenuComponent implements OnInit {
     this.tableShowed = true;
   }
 
+  
+  toSubmenu(){
+    this.menuShowed = true;
+    this.tableShowed = false;
+    this.selectedType = "";
+  }
+
 }

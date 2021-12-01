@@ -1,5 +1,9 @@
 <!-- <button (click)="showForm('null','null')" *ngIf=!menuShowed>Volver</button> -->
- 
+<button class="back" *ngIf="selectedType == 'Clientes' || 
+                            selectedType == 'Sedes' || 
+                            selectedType == 'Proyectos' || 
+                            selectedType == 'Solicitudes' || 
+                            selectedType == 'Transportes'" (click)="toSubmenu()"></button>
  
  <div class="container"
  fxLayout="column"

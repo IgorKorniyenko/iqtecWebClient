@@ -25,6 +25,7 @@ import { Tracking } from 'src/app/shared/models/tracking';
 import { TrackingService } from 'src/app/services/tracking.service';
 import { StateService } from 'src/app/services/state.service';
 import { State } from 'src/app/shared/models/state';
+import { DeleteDialogComponent } from '../crud-components/delete-dialog/delete-dialog.component';
 
 @Component({
   selector: 'app-table',
@@ -89,8 +90,11 @@ export class TableComponent implements OnInit {
         this.displayedColumns = ["Id", "RazonSocial", "Ciudad", "Telefono", "Accion"];
 
         this.clienteService.getClients().subscribe(data => {
+          // this.clients = data;
+          // this.dataSource = new MatTableDataSource(data);
+
           this.clients = data;
-          this.dataSource = new MatTableDataSource(data);
+          this.dataSource = new MatTableDataSource(this.clients.filter( a => a.activo));
         });
 
         break;
@@ -99,8 +103,11 @@ export class TableComponent implements OnInit {
         this.displayedColumns = ["Id", "RazonSocial", "Ciudad", "Telefono", "Accion"];
 
         this.headquaterService.getHeadquaters().subscribe(data => {
+          // this.headquaters = data;
+          // this.dataSource = new MatTableDataSource(data);
+
           this.headquaters = data;
-          this.dataSource = new MatTableDataSource(data);
+          this.dataSource = new MatTableDataSource(this.headquaters.filter(a => a.activo));
         });
 
         break;
@@ -109,8 +116,11 @@ export class TableComponent implements OnInit {
         this.displayedColumns = ["Id", "RazonSocial", "Ciudad", "Telefono", "Accion"];
 
         this.transportService.getTransports().subscribe(data => {
+          // this.transports = data;
+          // this.dataSource = new MatTableDataSource(data);
+
           this.transports = data;
-          this.dataSource = new MatTableDataSource(data);
+          this.dataSource = new MatTableDataSource(this.transports.filter(a => a.activo));
         });
 
         break;
@@ -119,8 +129,11 @@ export class TableComponent implements OnInit {
         this.displayedColumns = ["Id", "RazonSocial", "NombreCliente", "Accion"];
 
         this.projectService.getProjects().subscribe(data => {
+          // this.projects = data;
+          // this.dataSource = new MatTableDataSource(data);
+
           this.projects = data;
-          this.dataSource = new MatTableDataSource(data);
+          this.dataSource = new MatTableDataSource(this.projects.filter(a => a.activo));
         });
 
         break;
@@ -132,6 +145,9 @@ export class TableComponent implements OnInit {
         this.requestService.getRequests().subscribe(data => {
           this.requests = data;
           this.dataSource = new MatTableDataSource(data);
+
+          // this.requests = data;
+          // this.dataSource = new MatTableDataSource(this.requests.filter(a => a.activo));
         });
 
         break;
@@ -141,7 +157,7 @@ export class TableComponent implements OnInit {
 
         this.userService.getUsers().subscribe(data => {
           this.users = data;
-          this.dataSource = new MatTableDataSource(data);
+          this.dataSource = new MatTableDataSource(this.users.filter(a => a.activo));
         });
 
         break;
@@ -167,33 +183,87 @@ export class TableComponent implements OnInit {
   
 
 
-  deleteData(name: string, type: string) {
+  deleteData(id: any, type: string) {
+
+    let dialogMessage = "Dato borrado correctamente";
+
     switch(type){
       case 'client':
-        this.clienteService.deleteClient(name).subscribe();
+
+      console.log("cliente")
+        let client = this.clients.find(client => client.idCliente == id) as Client;
+        client.activo = false;
+
+        console.log(client)
+
+        this.clienteService.putCliente(client).subscribe();
+        this.openDeleteDialog(dialogMessage);
+
+       // this.clienteService.deleteClient(name).subscribe();
         
         break;
       
       case 'headquater':
-        this.headquaterService.deleteHeadquater(name).subscribe();
+        let headquater = this.headquaters.find(headquater => headquater.idSede == id) as Headquater;
+        headquater.activo = false;
+
+        this.headquaterService.putHeadquater(headquater).subscribe();
+        this.openDeleteDialog(dialogMessage);
+
+      //  this.headquaterService.deleteHeadquater(name).subscribe();
         break;
       
       case 'transport':
-        this.transportService.deleteTransport(name).subscribe();
+        let transport = this.transports.find(transport => transport.id == id) as Transport;
+        transport.activo = false;
+
+        this.transportService.putTransport(transport).subscribe();
+        this.openDeleteDialog(dialogMessage);
+
+        //this.transportService.deleteTransport(name).subscribe();
         break;
 
       case 'project':
-        this.projectService.deleteProject(name).subscribe();
+        let project = this.projects.find(project => project.idProyecto == id) as Project;
+        project.activo = false;
+
+        this.projectService.putProject(project).subscribe();
+        this.openDeleteDialog(dialogMessage);
+
+       // this.projectService.deleteProject(name).subscribe();
         break;
 
       case 'request':
-        this.requestService.deleteRequest(name).subscribe();
+        // let request = this.requests.find(request => request.idSolicitud == id) as Request;
+        // request.activo = false;
+
+        // this.requestService.putRequest(request).subscribe();
+
+        
+
+        this.requestService.deleteRequest(id).toPromise()
+        .then(data =>{
+          this.openDeleteDialog(dialogMessage);
+        })
+        .catch(error => {
+          dialogMessage = "No se puede borrar la solicitud";
+          console.log(dialogMessage)
+          this.openDeleteDialog(dialogMessage);
+        })
         break;
 
       case 'user':
-        this.userService.deleteUser(name).subscribe();
+        // let user = this.users.find(user => user.nombreUsuario == id) as User;
+        // user.activo = false;
+
+        // this.userService.putUser(user).subscribe();
+        this.openDeleteDialog(dialogMessage);
+
+        this.userService.deleteUser(id).subscribe();
         break;
     }
+    console.log(dialogMessage)
+    
    
   }
 
@@ -319,6 +389,20 @@ export class TableComponent implements OnInit {
   }
 
 
+  openDeleteDialog(message: string) {
+
+    const dialogRef = this.dialog.open(DeleteDialogComponent,{
+     data: {
+       message: message
+     }
+    });
+
+    dialogRef.afterClosed().subscribe(result => {
+      this.chargeObjects();
+    });
+  }
+
+
   changeState(track: Tracking){
 
     var stateList: State[];
@@ -338,6 +422,7 @@ export class TableComponent implements OnInit {
 
     
   }
+
   
 }
 

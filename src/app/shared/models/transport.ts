@@ -7,6 +7,7 @@ export class Transport {
 	cif: string;
 	direccion: Direccion;
 	listaContactos: Contacto[];
+    activo: boolean;
 
     constructor(){
         this.id = 0;
@@ -14,5 +15,6 @@ export class Transport {
         this.cif = "";
         this.direccion = new Direccion();
         this.listaContactos = [new Contacto()];
+        this.activo = false;
     }
 }

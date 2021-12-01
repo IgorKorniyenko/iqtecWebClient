@@ -10,6 +10,7 @@ export class Headquater implements Searchable{
 	direccion! : Direccion;
 	listaContactos! : Contacto[];
 	cliente! : Client;
+	activo: boolean;
 
 	constructor(){
 		this.idSede = 0;
@@ -17,5 +18,6 @@ export class Headquater implements Searchable{
 		this.direccion = new Direccion();
 		this.listaContactos = [new Contacto()];
 		this.cliente = new Client();
+		this.activo = false;
 	}
 }

@@ -1,5 +1,6 @@
 
 
+
 <h1>{{selectedTableType}}</h1>
 
  <mat-form-field id="filter" appearance="standard">
@@ -285,7 +286,7 @@
     <td mat-cell *matCellDef="let user">
       <button mat-raised-button color="info"  (click)="openUserDialog('show', user)">Mostrar</button> 
       <button mat-raised-button color="accent" *ngIf="userRol=='ROLE_ADMIN'" (click)="openUserDialog('edit', user)">Editar</button> 
-      <button mat-raised-button color="warn" *ngIf="userRol=='ROLE_ADMIN'" (click)="deleteData(user.id, 'user')">Borrar</button> 
+      <button mat-raised-button color="warn" *ngIf="userRol=='ROLE_ADMIN'" (click)="deleteData(user.nombreUsuario, 'user')">Borrar</button> 
     </td>
   </ng-container>
 

@@ -44,7 +44,7 @@
 
 <form novalidate [formGroup]="userForm" #fform="ngForm" (ngSubmit)="onSubmit()">
 
-    <p>
+    <!-- <p>
         <mat-form-field class="half-width" >
             <mat-label>Rol: </mat-label>
             <mat-select [(value)]="selectedRoleName" > 
@@ -52,7 +52,7 @@
             </mat-select> 
         </mat-form-field>
 
-    </p>
+    </p> -->
     <p>
         <mat-form-field class="half-width">
             <input matInput formControlName="nombreUsuario" placeholder="Nombre de usuario" type="text" required>

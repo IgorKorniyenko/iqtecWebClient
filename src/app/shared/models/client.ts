@@ -8,6 +8,7 @@ export class Client {
 	cif : string;
 	direccion : Direccion;
 	listaContactos : Contacto[];
+	activo: boolean;
 
 	constructor(){
 		this.idCliente = 0;
@@ -15,6 +16,7 @@ export class Client {
 		this.cif = "";
 		this.direccion = new Direccion();
 		this.listaContactos = [new Contacto(), new Contacto()];
+		this.activo = false;
 	}
 	
 }

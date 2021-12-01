@@ -27,7 +27,7 @@ export class RequestService {
     return this.http.put<Request>(BASEURL + REQUESTENDPOINTS.get('update'), transport);
   }
 
-  deleteRequest(name: string): Observable<Request>{
+  deleteRequest(name: number): Observable<any>{
     return this.http.delete<Request>(BASEURL + REQUESTENDPOINTS.get('delete') + name);
   }
 }
