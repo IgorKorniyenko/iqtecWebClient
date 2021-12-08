@@ -13,7 +13,7 @@ export class UserService {
   constructor(private http: HttpClient, private cookies: CookieService) { }
 
   login(user: User): Observable<any>{
-    return this.http.post<User>(BASEURL + 'auth/login', user);
+    return this.http.post<User>(BASEURL + USERSENDPOINTS.get('login'), user);
   }
 
   setToken(token: string) {

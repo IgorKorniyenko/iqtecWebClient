@@ -12,6 +12,6 @@ export class TipoService {
   constructor(private http: HttpClient) { }
 
   getTypes(): Observable<MaterialType[]>{
-    return this.http.get<MaterialType[]>(BASEURL + 'tipo/consultar');
+    return this.http.get<MaterialType[]>(BASEURL + 'Iqtec/tipo/consultar');
   }
 }

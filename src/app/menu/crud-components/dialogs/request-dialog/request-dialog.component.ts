@@ -133,6 +133,12 @@ export class RequestDialogComponent implements OnInit {
       projectSelect: [request.proyecto?request.proyecto.nombre:"", []],
       transportSelect : [request.transporte.nombre,[Validators.required]],
 
+      destruir : [request.instrucciones.destruir],
+      degauss : [request.instrucciones.degauss],
+      pasarRecicje : [request.instrucciones.pasarReciclaje],
+      separarReciclaje : [request.instrucciones.separarReciclaje],
+      reciclarTodo : [request.instrucciones.reciclarTodo],
+
       materiales: this.fb.array([])
     
     });
@@ -153,9 +159,9 @@ export class RequestDialogComponent implements OnInit {
 	   
       observaciones : ['',[Validators.required]],
 
-      headquaterSelect : ['',[Validators.required]],
-      projectSelect: ['', []],
-      transportSelect : ['',[Validators.required]],
+      // headquaterSelect : ['',[Validators.required]],
+      // projectSelect: ['', []],
+      // transportSelect : ['',[Validators.required]],
 
       materiales: this.fb.array([])
 

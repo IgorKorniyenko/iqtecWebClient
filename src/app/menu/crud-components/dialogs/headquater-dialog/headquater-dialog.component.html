@@ -1,6 +1,6 @@
 <div *ngIf="selectedOperation == 'create'">
     <h3>Registrar sede</h3>
-
+    <mat-dialog-content>
 <form novalidate [formGroup]="headquaterForm" #fform="ngForm" (ngSubmit)="onSubmit()">
     <p>
         <mat-form-field class="half-width">
@@ -95,9 +95,11 @@
         </mat-form-field>
     </p>
 
-  <button type="submit" mat-button class="background-primary text-floral-white">Submit</button>
+  <button type="submit" [disabled]="!headquaterForm.valid" mat-button class="text-floral-white">Submit</button>
   
 </form>
+
+</mat-dialog-content>
 </div>
 
 
@@ -128,6 +130,7 @@
 
 
 <div *ngIf="selectedOperation == 'edit'">
+    <mat-dialog-content>
     <h1>Editar sede</h1>
 
     <form novalidate [formGroup]="headquaterForm" #fform="ngForm" (ngSubmit)="onSubmit()">
@@ -233,8 +236,8 @@
             </mat-form-field>
         </p>
     
-      <button type="submit" mat-button class="background-primary text-floral-white">Submit</button>
+      <button type="submit" mat-button class="text-floral-white">Submit</button>
       
     </form>
-    
+</mat-dialog-content>
 </div>

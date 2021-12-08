@@ -41,12 +41,12 @@ export const HEADQUATERSENDPOINTS = new Map([
 ]);
 
 export const USERSENDPOINTS = new Map([
-    ["create", "auth/nuevo"],
-    ["login", "auth/login"],
-    ["getall", "auth/consultar"],
-    ["getbyname", "auth/nombre/"],
-    ["delete", "auth/eliminar/"],
-    ["update", "auth/actualizar"]
+    ["create", "Iqtec/auth/nuevo"],
+    ["login", "Iqtec/auth/login"],
+    ["getall", "Iqtec/auth/consultar"],
+    ["getbyname", "Iqtec/auth/nombre/"],
+    ["delete", "Iqtec/auth/eliminar/"],
+    ["update", "Iqtec/auth/actualizar"]
 ]);
 
 export const TRACKINGENDPOINTS = new Map([

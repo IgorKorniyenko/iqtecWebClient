@@ -86,7 +86,7 @@
         </mat-form-field>
     </p>
 
-  <button type="submit" mat-button class="background-primary text-floral-white">Submit</button>
+  <button type="submit" [disabled]="!transportForm.valid" mat-button class="text-floral-white">Submit</button>
   
 </form>
 </div>
@@ -215,7 +215,7 @@
             </mat-form-field>
         </p>
     
-      <button type="submit" mat-button class="background-primary text-floral-white">Submit</button>
+      <button type="submit" mat-button class=" text-floral-white">Submit</button>
       
     </form>
     

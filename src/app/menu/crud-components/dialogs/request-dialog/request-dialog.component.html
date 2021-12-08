@@ -40,7 +40,7 @@
         </mat-form-field>
     
         <mat-form-field class="half-width">
-            <input matInput formControlName="horario" placeholder="Horario" type="text" required>
+            <input matInput formControlName="horario" placeholder="Horario" type="time" required>
             <!-- <mat-error *ngIf="formErrors.calle">{{formErrors.calle}}</mat-error> -->
         </mat-form-field>
     
@@ -70,7 +70,7 @@
           <td>
               <mat-form-field>
                 <mat-label>Cantidad</mat-label>
-                <input matInput formControlName="quantity" class="form-control">
+                <input matInput formControlName="quantity" class="form-control" type="number">
             </mat-form-field>
              
           </td>
@@ -116,7 +116,7 @@
 
  
 
-  <button type="submit" mat-button class="background-primary text-floral-white">Submit</button>
+  <button type="submit" [disabled]="!requestForm.valid" mat-button class="text-floral-white">Submit</button>
   
 </form>
 </div>
@@ -208,19 +208,19 @@
     <p>
 
         
-        <mat-slide-toggle  [(ngModel)]="destruir" [ngModelOptions]="{standalone: true}">Destruir</mat-slide-toggle>
+        <mat-slide-toggle  formControlName="destruir">Destruir</mat-slide-toggle>
         <!-- <mat-error *ngIf="formErrors.destruir">{{formErrors.poblacion}}</mat-error> -->
         
-        <mat-slide-toggle [(ngModel)]="degauss" [ngModelOptions]="{standalone: true}">Degauss</mat-slide-toggle>
+        <mat-slide-toggle formControlName="degauss">Degauss</mat-slide-toggle>
         <!-- <mat-error *ngIf="formErrors.destruir">{{formErrors.poblacion}}</mat-error> -->
 
-        <mat-slide-toggle  [(ngModel)]="pasarRecicje" [ngModelOptions]="{standalone: true}">Pasar reciclaje</mat-slide-toggle>
+        <mat-slide-toggle  formControlName="pasarRecicje">Pasar reciclaje</mat-slide-toggle>
         <!-- <mat-error *ngIf="formErrors.destruir">{{formErrors.poblacion}}</mat-error> -->
         
-        <mat-slide-toggle [(ngModel)]="separarReciclaje" [ngModelOptions]="{standalone: true}">Separar reciclaje</mat-slide-toggle>
+        <mat-slide-toggle formControlName="separarReciclaje">Separar reciclaje</mat-slide-toggle>
         <!-- <mat-error *ngIf="formErrors.destruir">{{formErrors.poblacion}}</mat-error> -->
           
-        <mat-slide-toggle [(ngModel)]="reciclarTodo" [ngModelOptions]="{standalone: true}">Reciclar todo</mat-slide-toggle>
+        <mat-slide-toggle formControlName="reciclarTodo">Reciclar todo</mat-slide-toggle>
         <!-- <mat-error *ngIf="formErrors.destruir">{{formErrors.poblacion}}</mat-error> -->
        
     </p>
@@ -239,7 +239,7 @@
 
  
 
-  <button type="submit" mat-button class="background-primary text-floral-white">Submit</button>
+  <button type="submit" mat-button class=" text-floral-white">Submit</button>
   
 </form>
 </div>
@@ -250,6 +250,7 @@
 
 <!-- HTML para mostrar la solicitud -->
 <div *ngIf="selectedOperation == 'show'">
+    <mat-dialog-content>
     <h1>Visualizar solicitud</h1>
 
 
@@ -278,6 +279,6 @@
 
     <p>Comentario inventario: {{request.instrucciones.comentInventario}}</p>
     <p>Observaciones: {{request.instrucciones.observaciones}}</p>
-
+</mat-dialog-content>
 </div>
 

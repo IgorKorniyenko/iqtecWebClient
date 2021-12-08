@@ -56,7 +56,12 @@ export const CLIENTFORMFIELDS = {
     'proyectoSelect': '',
     'transportSelect': '',
     'projectSelect': '',
-    'headquaterSelect': ''
+    'headquaterSelect': '',
+    'destruir': '',
+    'degauss':'',
+    'pasarReciclaje':'',
+    'separarReciclaje':'',
+    'reciclarTodo': ''
   }
 
   export const PROJECTFORMFIELDS = {
